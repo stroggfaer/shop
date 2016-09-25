@@ -6,10 +6,13 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
 
-class SiteController extends Controller
+// Путь к моделям;
+use app\modules\index\models\LoginForm;
+use app\modules\index\models\ContactForm;
+use app\modules\index\controllers\AppController;
+
+class SiteController extends AppController
 {
     /**
      * @inheritdoc
