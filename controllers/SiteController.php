@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 use app\modules\index\models\LoginForm;
 use app\modules\index\models\ContactForm;
 use app\modules\index\controllers\AppController;
-
+use app\modules\index\models\Pages;
 class SiteController extends AppController
 {
     /**

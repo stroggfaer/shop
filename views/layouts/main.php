@@ -10,6 +10,10 @@ use app\assets\AppAsset;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
+<?php
+
+
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -35,22 +39,16 @@ AppAsset::register($this);
                 <a id="nav-toggle" href="#"><span></span></a>
             </div>
             <div class="col-xs-5  col-md-4" >
-                <div class="logo"><img src="images/logo.jpg" alt="" class="ad img-circle"> </div>
+                <div class="logo"><img src="/images/logo.jpg" alt="" class="ad img-circle"> </div>
                 <div class="title text-left">Руслан Zzzzzz</div>
             </div>
             <!--Меню-->
             <div class="col-md-5 col-xs-5 menu-content" >
-                <div class="menu">
-                    <div class="item"><a href="/" class="i open">Главная</a></div>
-                    <div class="item"><a href="/" class="i">Главная</a></div>
-                    <div class="item"><a href="/" class="i">Главная</a></div>
-                    <div class="item"><a href="/" class="i">Главная</a></div>
-                    <div class="item"><a href="/" class="i">Главная</a></div>
-                </div>
+             <?=\app\components\WMenu::widget()?>
             </div> <!--.Меню-->
             <!--Корзина-->
             <div class="col-md-3 col-xs-4 cart desktop" >
-                <a href="/" class="icon-cart">Моя корзина</a>
+                <a href="/basket/" class="icon-cart">Моя корзина</a>
                 <div class="good">Товар: <b>0</b> | Цена: <b>90 000 р.</b></div>
             </div> <!--.Корзина-->
             <!--Корзина моб. версия-->
@@ -65,7 +63,56 @@ AppAsset::register($this);
     </div> <!--/Header-->
     <!--Content-->
     <div id="center">
-       <?= $content ?>
+        <div class="row">
+            <!--sidebar-->
+            <div class="col-md-3 col-sm-12 sidebar">
+                <div class="row">
+                    <div class="col-sm-12 block">
+                        <h2 class="title">Поиск по сайту</h2>
+                        <form class="search" role="search">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Поиск">
+                            </div>
+                            <button type="submit" class="btn btn-default">Отправить</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 block">
+                        <h2 class="title">Каталог</h2>
+                        <div class="navbar">
+                            <div class="nav">
+                                <div class="item"><a href="#" class="open-down">Одежда</a></div>
+                                <div class="item"><a href="#">Одежда</a></div>
+                                <div class="item"><a href="#">Одежда</a></div>
+                                <div class="item groups">
+                                    <a href="#">Одежда <span class="open-down"></span></a>
+                                    <div class="i"><a href="#">Телефон</a></div>
+                                    <div class="i"><a href="#">Телефон</a></div>
+                                    <div class="i groups">
+                                        <a href="#">Часы <span class="open-down"></span></a>
+                                        <div class="i"><a href="#">Телефон</a></div>
+                                        <div class="i"><a href="#">Телефон</a></div>
+                                        <div class="i groups">
+                                            <a href="#">Часы <span class="open-down"></span></a>
+                                            <div class="i"><a href="#">Часы</a></div>
+                                            <div class="i"><a href="#">Часы</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item"><a href="#">Одежда</a></div>
+                                <div class="item"><a href="#">Одежда</a></div>
+                                <div class="item"><a href="#">Одежда</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!--/sidebar-->
+            <div class="col-lg-9 col-md-9 col-sm-12 content">
+                <?= $content ?>
+            </div>
+            <div class="clear"></div>
+        </div>
     </div>
     <!--footer-->
     <div id="footer">

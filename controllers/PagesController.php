@@ -49,7 +49,6 @@ class PagesController extends AppController
     public function actionPage($p)
     {
         $pages = Pages::getPageRow($p);
-        print_arr($pages);
         if(!empty($pages)){
             return $this->render($p, [ 'pages' => $pages,]);
         }else {
