@@ -1,15 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Strogg
- * Date: 01.10.2016
- * Time: 20:19
- */
+use yii\helpers\Html;
+use yii\widgets\ListView;
 
 ?>
 <!---Карточка товара-->
 <div id="good">
-    <h1 class="title size-1">Эрго рюкзак (слинг рюкзак) Сангрия</h1>
+    <h1 class="title size-1"><?=$model->name?></h1>
     <div class="row">
         <div class="col-md-5 block-1">
             <div class="image">
@@ -27,8 +23,8 @@
             </div>  <!--Миниатюр-->
         </div>
         <div class="col-md-7 block-2">
-            <div class="price disc">2 300 р.</div>
-            <span class="price discount ">4 000 р.</span>
+            <div class="price <?=($model->price_d > 0) ? 'disc':''?>"><?=$model->price?> р.</div>
+            <?=($model->price_d > 0) ? '<span class="price-discount">'.$model->price_d.' р.</span>' : ''?>
             <div class="block">
                 <div class="button_vinous"><div>Добавить в корзину</div></div>
                 <span class="buy"><a href="#" class="dashed">Купить в одинь клик</a></span>
@@ -42,7 +38,7 @@
             <div class="description">
                 <h2>Описание</h2>
                 <div class="text">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    <?=!empty($model->text) ? $model->text : 'Нет Описание'?>
                 </div>
             </div>
         </div>

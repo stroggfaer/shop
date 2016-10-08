@@ -1,10 +1,12 @@
 <?php
 
 namespace app\modules\catalog\controllers;
+use app\modules\catalog\models\Category;
 use app\modules\index\controllers\AppController;
 use app\modules\catalog\models\Goods;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use Yii;
 /**
@@ -20,23 +22,32 @@ class DefaultController extends AppController
     public function actionIndex()
     {
         $model = new Goods;
-        $model->getGoodsAll();
-        $dataProvider = $model->getItemGoods(Yii::$app->request->queryParams);
-        return $this->render('index', [
-            'model'=>$model,
-            'dataProvider'=>$dataProvider,
-        ]);
+        $dataProvider = $model->getItemGoods(Yii::$app->request->queryParams,20);
+            return $this->render('index', [
+                'model' => $model,
+                'dataProvider' => $dataProvider,
+            ]);
     }
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $id = Yii::$app->request->get('id');
+        $model = new Goods;
+        $category = Category::getCategoryRow($id);
+        if(empty($category)) throw new \yii\web\HttpException(404, 'Такого товара нет');
+        $dataProvider = $model->getItemGoodsRow(Yii::$app->request->queryParams,20,$id);
+            return $this->render('view', [
+                'model' => $model,
+                'category' => $category,
+                'dataProvider' => $dataProvider,
+            ]);
+
     }
-    public function actionGood($id,$url=false)
+    public function actionGood($id)
     {
+        $id = Yii::$app->request->get('id');
         return $this->render('good', [
             'model' => $this->findModel($id),
+
         ]);
     }
     /**

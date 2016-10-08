@@ -8,6 +8,7 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+$session = Yii::$app->session;
 ?>
 <?php $this->beginPage() ?>
 <?php
@@ -49,12 +50,12 @@ AppAsset::register($this);
             <!--Корзина-->
             <div class="col-md-3 col-xs-4 cart desktop" >
                 <a href="/basket/" class="icon-cart">Моя корзина</a>
-                <div class="good">Товар: <b>0</b> | Цена: <b>90 000 р.</b></div>
+                <div class="good">Товар: <b class="counts"><?=$session['basket.count']?></b> | Цена: <b class="money"><?= ($session['basket.money'] > 0 ? $session['basket.money'] : 0);?> р.</b></div>
             </div> <!--.Корзина-->
             <!--Корзина моб. версия-->
             <div class="col-xs-2 cart mobile" >
                 <a href="/" class="icon-cart">
-                    <div class="count">5</div>
+                    <div class="count counts"><?=$session['basket.count']?></div>
                     <div class="c">Корзина</div>
                 </a>
             </div><!--Корзина моб. версия-->
@@ -80,31 +81,7 @@ AppAsset::register($this);
                 <div class="row">
                     <div class="col-sm-12 block">
                         <h2 class="title">Каталог</h2>
-                        <div class="navbar">
-                            <div class="nav">
-                                <div class="item"><a href="#" class="open-down">Одежда</a></div>
-                                <div class="item"><a href="#">Одежда</a></div>
-                                <div class="item"><a href="#">Одежда</a></div>
-                                <div class="item groups">
-                                    <a href="#">Одежда <span class="open-down"></span></a>
-                                    <div class="i"><a href="#">Телефон</a></div>
-                                    <div class="i"><a href="#">Телефон</a></div>
-                                    <div class="i groups">
-                                        <a href="#">Часы <span class="open-down"></span></a>
-                                        <div class="i"><a href="#">Телефон</a></div>
-                                        <div class="i"><a href="#">Телефон</a></div>
-                                        <div class="i groups">
-                                            <a href="#">Часы <span class="open-down"></span></a>
-                                            <div class="i"><a href="#">Часы</a></div>
-                                            <div class="i"><a href="#">Часы</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item"><a href="#">Одежда</a></div>
-                                <div class="item"><a href="#">Одежда</a></div>
-                                <div class="item"><a href="#">Одежда</a></div>
-                            </div>
-                        </div>
+                        <?=\app\components\WCategory::widget()?>
                     </div>
                 </div>
             </div> <!--/sidebar-->
@@ -135,6 +112,18 @@ AppAsset::register($this);
         <div class="clear"></div>
     </div><!--/footer-->
 </div>
+<?php
+\yii\bootstrap\Modal::begin([
+    'header' => '<h2>Корзина</h2>',
+    'id' => 'basket-modal',
+    'size' => 'modal-lg',
+    'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
+        <a href="/basket/" class="btn btn-success">Оформить заказ</a>
+        <button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>'
+]);
+
+\yii\bootstrap\Modal::end();
+?>
 <?php $this->endBody() ?>
 </body>
 </html>

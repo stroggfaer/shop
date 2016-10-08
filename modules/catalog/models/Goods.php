@@ -1,6 +1,7 @@
 <?php
 
 namespace app\modules\catalog\models;
+use app\modules\catalog\models\CategoryDetails;
 use yii\data\ActiveDataProvider;
 use yii\db\Query;
 use Yii;
@@ -43,20 +44,42 @@ class Goods extends \yii\db\ActiveRecord
         return $this->hasOne(Images::className(), ['id' => 'image_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCategory()
-    {
-        return $this->hasOne(Category::className(), ['id' => 'category_id']);
-    }
+
     // Загрузка все товары;
     public static function getGoodsAll()
     {
-        return Goods::find()->where(['status'=> 1])->orderBy('date ASC')->all();
+        return Goods::find()->leftJoin(CategoryDetails::tableName(),'category_details.good_id = goods.id')->where(['category_details.status'=> 1,'goods.status'=>1])->orderBy('goods.date ASC')->all();
     }
+
+    public static function getGoodsCategoryAll($id)
+    {
+        return Goods::find()->leftJoin(CategoryDetails::tableName(),'category_details.good_id = goods.id')->where(['category_details.status'=> 1,'goods.status'=>1,'category_details.category_id'=> $id])->orderBy('goods.date ASC')->all();
+    }
+    // Загрузка товаров каталог;
     public function getItemGoods($params,$pageSize = 20){
-        $query =  Goods::find()->where(['status'=> 1]);
+        $query = Goods::find()->leftJoin(CategoryDetails::tableName(),'category_details.good_id = goods.id')->where(['category_details.status'=> 1,'goods.status'=>1])->orderBy('goods.date ASC');
+        // add conditions that should always apply here
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'sort'=>[
+                'attributes'=>[
+                    'name',
+                ]
+            ],
+            'pagination' => [
+                'pageSize' => $pageSize,
+                'defaultPageSize' => false,
+                'pageParam' => 'page',
+                'forcePageParam' => false,
+                'pageSizeParam' => false,
+            ]
+        ]);
+        $this->load($params);
+        return $dataProvider;
+    }
+    // Загрузка товаров по категорией + пагинаций;
+    public function getItemGoodsRow($params,$pageSize = 20,$id){
+        $query = Goods::find()->leftJoin(CategoryDetails::tableName(),'category_details.good_id = goods.id')->where(['category_details.status'=> 1,'goods.status'=>1,'category_details.category_id'=> $id])->orderBy('goods.date ASC');
 
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([
@@ -68,9 +91,10 @@ class Goods extends \yii\db\ActiveRecord
             ],
             'pagination' => [
                 'pageSize' => $pageSize,
-                'defaultPageSize' => 20,
+                'defaultPageSize' => false,
                 'pageParam' => 'page',
                 'forcePageParam' => false,
+                'pageSizeParam' => false,
             ]
         ]);
         $this->load($params);

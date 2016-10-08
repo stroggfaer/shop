@@ -30,6 +30,9 @@ use yii\widgets\ListView;
                     'class' => 'row',
                 ],
                 'itemOptions' => ['class' => 'col-md-4 col-sm-4  goods'],
+                'layout' => "
+                           <div class='items'>{items}<div class='clear'></div> </div>\n{pager}
+                           ",
                 'itemView' => function ($model) {
                    // return Html::a(Html::encode($model->title), ['good', 'id' => $model->id]);
                     return WGoodsItem::widget([

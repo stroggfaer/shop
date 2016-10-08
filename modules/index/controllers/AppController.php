@@ -5,6 +5,7 @@ namespace app\modules\index\controllers;
 use yii\web\Controller;
 use yii\db\Connection;
 use app\modules\index\models\Pages;
+use app\modules\catalog\models\Category;
 use  yii;
 /**
  * Default controller for the `AppController` module
@@ -18,6 +19,7 @@ class AppController extends Controller
      */
     public $layout = '@app/views/layouts/main';
     public $pagesMenu;
+    public $categoryMain;
     // CEO;
     protected function setMeta($title = null, $keywords = null, $description = null){
         $this->view->title = $title;
@@ -29,8 +31,6 @@ class AppController extends Controller
     {
         // Загрузка меню;
         $pagesMenu = Pages::getPages();
-
-        // custom initialization code goes here
 
         parent::init();
 

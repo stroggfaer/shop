@@ -27,6 +27,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/script.js',
+        'js/catalog.js',
         'scripts/jquery.easing.js',
         'scripts/swipebox/jquery.swipebox.js',
         'scripts/owl/owl.carousel.js',

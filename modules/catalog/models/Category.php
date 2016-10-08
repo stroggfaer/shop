@@ -32,6 +32,7 @@ class Category extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    /*
     public function rules()
     {
         return [
@@ -41,11 +42,12 @@ class Category extends \yii\db\ActiveRecord
             [['seo_description'], 'string', 'max' => 400],
             [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['parent_id' => 'id']],
         ];
-    }
+    }*/
 
     /**
      * @inheritdoc
      */
+    /*
     public function attributeLabels()
     {
         return [
@@ -57,7 +59,7 @@ class Category extends \yii\db\ActiveRecord
             'seo_description' => 'Seo Description',
             'status' => 'Status',
         ];
-    }
+    }*/
 
     /**
      * @return \yii\db\ActiveQuery
@@ -82,4 +84,29 @@ class Category extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Goods::className(), ['category_id' => 'id']);
     }
+    static function getCategoryAll()
+    {
+        return Category::find()->where(['status'=> 1])->orderBy('id')->indexBy('id')->asArray()->all();
+    }
+    static function getCategoryRow($id)
+    {
+        //print_arr($this->id);
+        return Category::find()->where(['status'=> 1,'id'=>$id])->one();
+    }
+    // Загрухзка дерево категория;
+    static function getTree()
+    {
+        $category = self::getCategoryAll();
+        $tree = [];
+        foreach ($category as $id=>&$node) {
+            if (empty($node['parent_id']) && !$node['parent_id']) {
+                $tree[$id] = &$node;
+            }else {
+                 $category[$node['parent_id']]['group'][$node['id']] = &$node;
+            }
+        }
+        return $tree;
+    }
+
+
 }
