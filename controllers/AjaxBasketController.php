@@ -34,5 +34,4 @@ class AjaxBasketController extends AppController
             return $response->data = ['id' => $id,'countsBasket'=>$session['basket.count'],'basketMoney'=>$session['basket.money']];
         }
     }
-
 }

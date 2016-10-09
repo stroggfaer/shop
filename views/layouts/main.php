@@ -118,7 +118,7 @@ $session = Yii::$app->session;
     'id' => 'basket-modal',
     'size' => 'modal-lg',
     'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
-        <a href="/basket/" class="btn btn-success">Оформить заказ</a>
+        <a href="/basket/" class="btn btn-success no-border" style="color:#fff;">Оформить заказ</a>
         <button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>'
 ]);
 
