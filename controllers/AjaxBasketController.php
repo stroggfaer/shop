@@ -29,9 +29,14 @@ class AjaxBasketController extends AppController
                 $addToBasket->addToBasket($good);
             }
             // Ответ данные JSON-формат;
-            $response = Yii::$app->response;
-            $response->format = \yii\web\Response::FORMAT_JSON;
-            return $response->data = ['id' => $id,'countsBasket'=>$session['basket.count'],'basketMoney'=>$session['basket.money']];
+           // $response = Yii::$app->response;
+            //$response->format = \yii\web\Response::FORMAT_JSON;
+           // return $response->data = ['id' => $id,'countsBasket'=>$session['basket.count'],'basketMoney'=>$session['basket.money']];
+            return \app\components\basket\WBasketModalGoods::widget([
+                'basket' => $session['basket'],
+                'counts' => $session['basket.count'],
+                'money' => $session['basket.money'],
+            ]);
         }
     }
 }

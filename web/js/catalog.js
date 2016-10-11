@@ -9,12 +9,11 @@ function addBasket(id) {
     $.ajax({
         url: '/ajax-basket/add-basket',
         type: 'POST',
-        dataType:'JSON',
         data:{'addBasket' : true, 'id' : id},
         success: function(response){
-            if(response.id) {
-                $("div.cart .counts","#header").text(response.countsBasket);
-                $("div.cart .money","#header").text(response.basketMoney + ' p.');
+            if(response.length > 0) {
+               // $("div.cart .counts","#header").text(response.countsBasket);
+               // $("div.cart .money","#header").text(response.basketMoney + ' p.');
                 modalBasketShow(response);
             }else{
                 console.log("Ошибка");
@@ -30,6 +29,6 @@ function addBasket(id) {
 }
 // Модальная окно корзины;
 function modalBasketShow(response){
-    $('#basket-modal .modal-body').html(response.id);
+    $('#basket-modal .modal-body').html(response);
     $('#basket-modal').modal();
 }

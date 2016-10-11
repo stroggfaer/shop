@@ -22,4 +22,9 @@ class Basket extends \yii\db\ActiveRecord
         // Подсчет общей количество суммы;
         $_SESSION['basket.money'] = isset($_SESSION['basket.money']) ? $_SESSION['basket.money'] + $count * $good->price : $count * $good->price;
     }
+
+    // Очистить корзину;
+    public function  clearBasket($good_id) {
+        unset($_SESSION['basket'][$good_id]);
+    }
 }
