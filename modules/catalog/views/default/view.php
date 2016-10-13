@@ -2,21 +2,20 @@
 use app\components\WGoodsItem;
 use yii\helpers\Html;
 use yii\widgets\ListView;
+use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\catalog\models\GoodsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = $category->title;
+$this->params['breadcrumbs'][] = ['class' => 'gray', 'label' => 'Каталог', 'url' => ['/catalog/']];
 $this->params['breadcrumbs'][] = $this->title;
+
+
 ?>
 <div id="goods-list">
-    <!--Хлебная крошка-->
-    <ol class="breadcrumb">
-        <li><a href="#" class="gray" >Главная</a></li>
-        <li><a href="#" class="gray" >Одежда</a></li>
-        <li class="active">Куртка</li>
-    </ol> <!--/Хлебная крошка-->
+    <?= Breadcrumbs::widget(['options' => ['class' => 'breadcrumb'],'tag' => 'ol','homeLink' => ['label' => 'Главная','class' => 'gray', 'url' => '/'], 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],]);?>
     <!--Сортировка-->
     <div class="sort-filter">
         <b>Сортировка:</b>

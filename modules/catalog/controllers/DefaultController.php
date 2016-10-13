@@ -35,6 +35,10 @@ class DefaultController extends AppController
         $category = Category::getCategoryRow($id);
         if(empty($category)) throw new \yii\web\HttpException(404, 'Такого товара нет');
         $dataProvider = $model->getItemGoodsRow(Yii::$app->request->queryParams,20,$id);
+
+        // Хлебная крошка;
+        $breadcrumbsCatalog = '';
+
             return $this->render('view', [
                 'model' => $model,
                 'category' => $category,

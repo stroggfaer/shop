@@ -26,7 +26,8 @@ use yii\widgets\ListView;
             <div class="price <?=($model->price_d > 0) ? 'disc':''?>"><?=$model->price?> р.</div>
             <?=($model->price_d > 0) ? '<span class="price-discount">'.$model->price_d.' р.</span>' : ''?>
             <div class="block">
-                <div class="button_vinous"><div>Добавить в корзину</div></div>
+
+                <div class="button_vinous" onclick="addBasket('<?=$model->id?>',false);"><div>Добавить в корзину</div></div>
                 <span class="buy"><a href="#" class="dashed">Купить в одинь клик</a></span>
             </div>
             <div class="options">

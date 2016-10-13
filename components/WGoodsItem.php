@@ -23,7 +23,7 @@ class WGoodsItem extends Widget{
                 <div class="block">
                     <div class="title"><?=$this->model->name?>  <?=$this->model->count_max?><span class="min-title">women</span></div>
                     <div class="price"><?=$this->model->price?> р. <?=($this->model->price_d > 0) ? '<span class="price-discount">'.$this->model->price_d.' р.</span>' : ''?></div>
-                    <div class="button_green js-add-card" data-good-id="<?=$this->model->id?>" onclick="addBasket('<?=$this->model->id?>');"><div>Купить</div></div>
+                    <div class="button_green js-add-card" onclick="addBasket('<?=$this->model->id?>',true);"><div>Купить</div></div>
                 </div>
             </div>
         <?php

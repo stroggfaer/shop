@@ -2,9 +2,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
+;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
@@ -40,8 +38,10 @@ $session = Yii::$app->session;
                 <a id="nav-toggle" href="#"><span></span></a>
             </div>
             <div class="col-xs-5  col-md-4" >
-                <div class="logo"><img src="/images/logo.jpg" alt="" class="ad img-circle"> </div>
-                <div class="title text-left">Руслан Zzzzzz</div>
+                <a href="/">
+                  <div class="logo"><img src="/images/logo.jpg" alt="" class="ad img-circle"> </div>
+                  <div class="title text-left">Руслан Zzzzzz</div>
+                </a>
             </div>
             <!--Меню-->
             <div class="col-md-5 col-xs-5 menu-content" >
@@ -50,7 +50,7 @@ $session = Yii::$app->session;
             <!--Корзина-->
             <div class="col-md-3 col-xs-4 cart desktop" >
                 <a href="/basket/" class="icon-cart">Моя корзина</a>
-                <div class="good">Товар: <b class="counts"><?=$session['basket.count']?></b> | Цена: <b class="money"><?= ($session['basket.money'] > 0 ? $session['basket.money'] : 0);?> р.</b></div>
+                <div class="good">Товар: <b class="counts"><?=($session['basket.count'] > 0 ? $session['basket.count'] : 0)?></b> | Цена: <b class="money"><?= ($session['basket.money'] > 0 ? $session['basket.money'] : 0);?> р.</b></div>
             </div> <!--.Корзина-->
             <!--Корзина моб. версия-->
             <div class="col-xs-2 cart mobile" >
@@ -119,7 +119,7 @@ $session = Yii::$app->session;
     'size' => 'modal-lg',
     'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
         <a href="/basket/" class="btn btn-success no-border" style="color:#fff;">Оформить заказ</a>
-        <button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>'
+        <button type="button" class="btn btn-danger" onclick="return deleteBasket();">Очистить корзину</button>'
 ]);
 
 \yii\bootstrap\Modal::end();

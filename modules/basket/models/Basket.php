@@ -23,8 +23,13 @@ class Basket extends \yii\db\ActiveRecord
         $_SESSION['basket.money'] = isset($_SESSION['basket.money']) ? $_SESSION['basket.money'] + $count * $good->price : $count * $good->price;
     }
 
-    // Очистить корзину;
-    public function  clearBasket($good_id) {
+    // Удалить товар с корзины;
+    public function  deleteBasket($good_id) {
+        if(!isset($_SESSION['basket'][$good_id])) return false;
+        $countMinus = $_SESSION['basket'][$good_id]['count'];
+        $moneyMinus = $_SESSION['basket'][$good_id]['count'] * $_SESSION['basket'][$good_id]['price'];
+        $_SESSION['basket.count'] -= $countMinus;
+        $_SESSION['basket.money'] -= $moneyMinus;
         unset($_SESSION['basket'][$good_id]);
     }
 }

@@ -26,8 +26,9 @@ class WBasketModalGoods extends Widget
     public function run(){
 
         ?>
-        <?php if(!empty($this->basket)): ?>
-            <div class="table-responsive">
+
+            <div class="table-responsive" id="modal-table">
+              <?php if(!empty($this->basket)): ?>
                 <table class="table table-hover table-striped">
                     <thead>
                     <tr>
@@ -45,7 +46,7 @@ class WBasketModalGoods extends Widget
                             <td><?= $item['name']?></td>
                             <td><?= $item['count']?></td>
                             <td><b><?= $item['price']?> р.</b></td>
-                            <td><span data-id="<?= $id?>" class="glyphicon glyphicon-remove text-danger del-item" aria-hidden="true"></span></td>
+                            <td><span onclick="return deleteBasket('<?= $id?>');" class="glyphicon glyphicon-remove text-danger del-item close" aria-hidden="true"></span></td>
                         </tr>
                     <?php endforeach?>
                     <tr>
@@ -58,10 +59,10 @@ class WBasketModalGoods extends Widget
                     </tr>
                     </tbody>
                 </table>
+              <?php else: ?>
+                  <div class="lead">Корзина пуста</div>
+              <?php endif;?>
             </div>
-        <?php else: ?>
-            <h3>Корзина пуста</h3>
-        <?php endif;?>
         <?php
     }
 }

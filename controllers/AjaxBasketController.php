@@ -15,7 +15,7 @@ class AjaxBasketController extends AppController
     {
         // Параметры пост данные;
         $request = Yii::$app->request;
-        if($request->post('addBasket')) {
+        if ($request->post('addBasket')) {
             $id = $request->post('id');
             // Загруэка данные в сессия;
             $good = Goods::findOne($id);
@@ -25,13 +25,13 @@ class AjaxBasketController extends AppController
             $addToBasket = new Basket();
             // Проверяем на количество пустоту и null;
             $counts = (isset($session['basket'][$good->id]['count']) && !empty($session['basket'][$good->id]['count']) ? $session['basket'][$good->id]['count'] : 0);
-            if($good->count_max > $counts) {
+            if ($good->count_max > $counts) {
                 $addToBasket->addToBasket($good);
             }
             // Ответ данные JSON-формат;
-           // $response = Yii::$app->response;
+            // $response = Yii::$app->response;
             //$response->format = \yii\web\Response::FORMAT_JSON;
-           // return $response->data = ['id' => $id,'countsBasket'=>$session['basket.count'],'basketMoney'=>$session['basket.money']];
+            // return $response->data = ['id' => $id,'countsBasket'=>$session['basket.count'],'basketMoney'=>$session['basket.money']];
             return \app\components\basket\WBasketModalGoods::widget([
                 'basket' => $session['basket'],
                 'counts' => $session['basket.count'],
@@ -39,4 +39,43 @@ class AjaxBasketController extends AppController
             ]);
         }
     }
+    // Удалить товар с корзины;
+    public function actionDeleteBasket()
+    {
+        // Параметры пост данные;
+        $request = Yii::$app->request;
+        if ($request->post('deleteBasket')) {
+            $id = $request->post('id');
+            $modal = $request->post('modal');
+            $session = Yii::$app->session;
+            $session->open();
+            $deleteToBasket = new Basket();
+            $deleteToBasket->deleteBasket($id);
+            // Загрузка данные;
+            if(isset($modal)) {
+                return \app\components\basket\WBasketModalGoods::widget([
+                    'basket' => $session['basket'],
+                    'counts' => $session['basket.count'],
+                    'money' => $session['basket.money'],
+                ]);
+            }else{
+                //
+
+            }
+        }
+        // Очистить корзины;
+        if ($request->post('clearBasket')) {
+            $session = Yii::$app->session;
+            $session->remove('basket');
+            $session->remove('basket.count');
+            $session->remove('basket.money');
+            return \app\components\basket\WBasketModalGoods::widget([
+                'basket' => $session['basket'],
+            ]);
+        }
+
+    }
+
+
+
 }

@@ -3,7 +3,7 @@
 namespace app\modules\basket\controllers;
 
 use yii\web\Controller;
-
+use Yii;
 /**
  * Default controller for the `basket` module
  */
@@ -15,6 +15,8 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $session = Yii::$app->session;
+        // Загрузка товаров;
+        return $this->render('index',['goodsBasket'=>$session['basket']]);
     }
 }

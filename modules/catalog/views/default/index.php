@@ -2,14 +2,15 @@
 use app\components\WGoodsItem;
 use yii\helpers\Html;
 use yii\widgets\ListView;
+use yii\widgets\Breadcrumbs;
+
+$this->title = 'Каталог';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div id="goods-list">
     <!--Хлебная крошка-->
-    <ol class="breadcrumb">
-        <li><a href="#" class="gray" >Главная</a></li>
-        <li><a href="#" class="gray" >Одежда</a></li>
-        <li class="active">Куртка</li>
-    </ol> <!--/Хлебная крошка-->
+    <?= Breadcrumbs::widget(['options' => ['class' => 'breadcrumb'],'tag' => 'ol','homeLink' => ['label' => 'Главная','class' => 'gray', 'url' => '/'], 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],]);?>
+    <!--/Хлебная крошка-->
     <!--Сортировка-->
     <div class="sort-filter">
         <b>Сортировка:</b>
@@ -20,7 +21,7 @@ use yii\widgets\ListView;
     </div><!--/Сортировка-->
     <!--Модуль-->
     <div class="module">
-        <h2><a href="#" class="black"><?= $this->context->action->uniqueId ?></a><span class="line-br"></span></h2>
+        <h2><a href="#" class="black"><?= $this->title?></a><span class="line-br"></span></h2>
 
             <?= ListView::widget([
                 'dataProvider' => $dataProvider,
