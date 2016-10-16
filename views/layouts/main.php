@@ -2,11 +2,11 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 use yii\helpers\Html;
-;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
 $session = Yii::$app->session;
+
 ?>
 <?php $this->beginPage() ?>
 <?php

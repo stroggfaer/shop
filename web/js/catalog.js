@@ -23,7 +23,6 @@ function addBasket(id,modal) {
             alert('Error!');
         }
     });
-
  return false;
 }
 // Модальная окно корзины;
@@ -51,4 +50,24 @@ function updateBasket() {
          if($("#basket").length) $("#basket").html($(html).find("#basket").html());
         return false;
     });
+}
+// Оформит заказ;
+function orderBasket() {
+    $.ajax({
+        url: '/ajax-basket/add-basket',
+        type: 'POST',
+        data:{'addBasket' : true, 'id' : id},
+        success: function(response){
+            if(response.length > 0) {
+
+            }else{
+                console.log("Ошибка");
+                return false;
+            }
+        },
+        error: function(){
+            alert('Error!');
+        }
+    });
+    return false;
 }

@@ -25,46 +25,10 @@
         </div>
         <?php endforeach; ?>
     </div> <!--Список товара-->
-
     <div class="row">
         <!--Офрмить заказ-->
         <div class="order-form col-sm-7">
-            <div class="panel panel-default">
-                <div class="panel-heading">Адресс доставки</div>
-                <div class="panel-body">
-                    <form role="form">
-                        <div class="form-group">
-                            <input type="text" name="fio" value=""  placeholder="ФИО" class="form-control" placeholder="Телефон" onfocus="$(this).attr('placeholder','')" onblur="$(this).attr('placeholder','ФИО')"  />
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="phone" value=""  class="form-control"  placeholder="Телефон" onfocus="$(this).attr('placeholder','')" onblur="$(this).attr('placeholder','Телефон')" />
-                        </div>
-                        <div class="form-group">
-                            <input type="email" name="email" value=""  class="form-control"  placeholder="Email" onfocus="$(this).attr('placeholder','')" onblur="$(this).attr('placeholder','Email')" >
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="address" value="" class="form-control"  placeholder="Адрес" onfocus="$(this).attr('placeholder','')" onblur="$(this).attr('placeholder','Адрес')" />
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" name="comment" rows="3" placeholder="Комментарий " onfocus="$(this).attr('placeholder','')" onblur="$(this).attr('placeholder','Комментарий')"></textarea>
-                        </div>
-                        <label>Способ Доставки</label>
-                        <div class="radio form-group">
-                            <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                                Почта россия - 300 p.
-                            </label>
-                        </div>
-                        <div class="radio form-group">
-                            <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                Самовывоз - бесплатно.
-                            </label>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
+            <?=\app\components\basket\WBasketOrderForm::widget(['model'=>$model])?>
         </div><!--/Офрмить заказ-->
         <div class="total col-sm-5">
             <table class="table">

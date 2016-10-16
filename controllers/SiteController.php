@@ -12,6 +12,7 @@ use app\modules\index\models\LoginForm;
 use app\modules\index\models\ContactForm;
 use app\modules\index\controllers\AppController;
 use app\modules\index\models\Pages;
+use app\modules\catalog\models\Goods;
 class SiteController extends AppController
 {
     /**
@@ -63,7 +64,12 @@ class SiteController extends AppController
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        // Новинки;
+        $newGoods = Goods::find()->where(['status'=>1])->orderby('date desc')->limit(3)->all();
+        return $this->render('index', [
+                'newGoods' => $newGoods,
+
+            ]);
     }
 
     /**

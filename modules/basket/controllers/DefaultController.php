@@ -1,7 +1,8 @@
 <?php
 
 namespace app\modules\basket\controllers;
-
+use app\modules\basket\models\Address;
+use app\modules\basket\models\Delivery;
 use yii\web\Controller;
 use Yii;
 /**
@@ -16,7 +17,17 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         $session = Yii::$app->session;
+        // Оформить заказ;
+        $model = new Address();
+        if(Yii::$app->request->post('order')) {
+            if ($model->load(Yii::$app->request->post()) and $model->save(true)) {
+                //Yii::$app->session->setFlash('success','Спасибо! Мы обязательно Вам перезвоним.');
+            }
+        }
         // Загрузка товаров;
-        return $this->render('index',['goodsBasket'=>$session['basket']]);
+        return $this->render('index',[
+            'goodsBasket'=>$session['basket'],
+            'model'=>$model,
+        ]);
     }
 }
