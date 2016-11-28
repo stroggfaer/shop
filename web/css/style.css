@@ -1,0 +1,510 @@
+/*Поключение шрифт*/
+/*
+@font-face {
+   font-family: Ampir Deco;
+   src: local("Ampir Deco"),
+   url('fon/ampir_deco.ttf');
+}*/
+
+/* End of Yahoo! CSS Reset */
+
+html {
+    height: 100%;
+}
+body {
+    background: #e6e6e6 none repeat scroll 0 0;
+}
+div.container {
+    max-width: 960px;
+    background: #ffffff;
+    padding-top: 10px;
+    min-width: 318px;
+}
+/*Футер*/
+#footer {
+    margin: 10px 0;
+}
+#footer div.row{
+    background-color: #8c0606;
+    height: 50px;
+}
+#footer .bottom-menu{
+
+}
+#footer .bottom-menu span{
+    color:#ffffff;
+    margin: 0 5px;
+}
+#footer div.row div.bottom {
+    padding-top: 15px;
+}
+#footer div.row div.bottom .copyright {
+    color: #ffffff;
+    display: block;
+    text-align: right;
+}
+/*Центер*/
+#center {
+}
+#center div.row {
+
+}
+/*Контент*/
+#center div.content {
+    background: #ffffff;
+    padding: 3px 10px;
+
+}
+/*Шапка сайта*/
+#header {
+    position: relative;
+    z-index: 99;
+}
+#header div.row {
+    background-color: #A70303;
+    height: 70px;
+    margin: 0px -30px 0px -30px;
+
+}
+#header div.br-1{
+    background: url("../images/header-br.png") no-repeat scroll 0 0;
+    height: 30px;
+    left: -30px;
+    position: absolute;
+    top: 100%;
+    width: 15px;
+}
+#header div.br-2 {
+    background: url("../images/header-br.png") no-repeat scroll right 0;
+    height: 30px;
+    position: absolute;
+    right: -30px;
+    top: 100%;
+    width: 15px;
+}
+#header div.menu-bar {
+    display: none;
+    float: left;
+    padding: 20px 0 20px 25px;
+}
+#header div.menu-bar div.icon-menu {
+
+    margin: 11px 0px 0px;
+    padding: 10px;
+}
+#header div.logo {
+    height: 70px;
+    overflow: hidden;
+    padding: 5px 0px;
+    width: 80px;
+    float: left;
+}
+#header div.title {
+    color: #fff;
+    font-family: Tahoma;
+    font-size: 23px;
+    margin: 20px 0px 0px;
+    padding: 0px;
+}
+/*Меню*/
+#header  div.menu-content {
+    padding: 0;
+}
+#header div.menu {
+    margin: 0;
+}
+#header div.menu div.item {
+    float: left;
+    height: 70px;
+    overflow: hidden;
+    width: 82.5px;
+
+}
+#header div.menu div.item a.i {
+    border: medium none;
+    color: #fff;
+    text-decoration: none;
+    padding: 25px 5px;
+    display: block;
+    text-align: center;
+}
+#header div.menu div.item a.open,#header div.menu div.item a:hover {
+    background: #8c0606;
+}
+
+/*Корзина*/
+#header div.cart {
+    background: #ae1515 none repeat scroll 0 0;
+    padding: 9px 5px;
+}
+#header div.cart.mobile {
+    display: none;
+}
+#header div.cart a.icon-cart {
+    background: url("../images/shop/cart.png") no-repeat;
+    color: #fff;
+    display: block;
+    font-size: 20px;
+    margin: 0px 0px 0px 15px;
+    padding: 0px 0px 0px 40px;
+    border: medium none;
+}
+#header div.cart div.good {
+    color: #fff;
+    padding: 0px 0px 3px 55px;
+}
+/*Слева сайтбар*/
+#center div.sidebar {
+    min-height: 40px;
+    padding-top: 3px;
+}
+div.sidebar div.block{
+    border: 1px solid #7F7F7F;
+    margin: 5px 0;
+    border-radius: 3px;
+}
+div.sidebar div.block h2.title {
+    background: #7f7f7f ;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0px -15px;
+    padding: 5px 15px;
+    text-transform: uppercase;
+}
+/*Поиск*/
+div.sidebar div.block form.search {
+    padding: 15px 0;
+}
+div.sidebar div.row {
+    margin: 0 -15px 0 -5px;
+}
+div.sidebar div.block div.form-group {
+    display: inline-block;
+}
+div.sidebar div.block div.form-group input.form-control {
+    font-size: 12px;
+    height: 25px;
+    padding: 0 10px;
+    width: 200px;
+}
+div.sidebar div.block .btn{
+    font-size: 12px;
+    padding: 3px 5px;
+    vertical-align: top;
+}
+/*Каталог*/
+div.navbar {
+    margin: 0px -15px;
+    padding: 5px 15px;
+}
+div.navbar div.nav {
+
+}
+div.navbar div.item.groups div.i{
+    padding: 0px 0px 0px 13px;
+}
+
+div.navbar div.nav div.item {
+    border-bottom: 1px dashed #ccc;
+    margin: 0px 0px 5px;
+}
+div.navbar div.nav div.item.groups,div.navbar div.nav div.i.groups {
+    font-weight: bold;
+}
+div.navbar div.nav div.item.groups .open-down {
+    margin: 0 0 0 9px;
+}
+div.navbar div.nav div.item.groups .open-down::after {
+    border-color: #A3A3A3 transparent transparent;
+    border-style: solid;
+    border-width: 5px;
+    content: " ";
+    display: block;
+    height: 0;
+    position: absolute;
+    right: 0px;
+    top: 7px;
+    width: 0;
+}
+div.navbar div.nav div.item a,div.navbar div.nav div.i a{
+    background: url("../images/shop/cat.gif") no-repeat scroll 0 3px;
+    padding: 0px 0px 0px 20px;
+    text-decoration: none;
+    color: #5f5f5f;
+    border: medium none;
+    position: relative;
+}
+div.navbar div.nav div.i {
+    font-weight: normal;
+    /* display: none;*/
+}
+div.navbar div.nav div.i a {
+    background: none;
+    border: medium none;
+}
+div.navbar div.nav div.item a.open,
+div.navbar div.nav div.item a:hover,
+div.navbar div.nav div.i a.open,
+div.navbar div.nav div.i a:hover {
+    color: #8b0000;
+    border: medium none;
+}
+/*Главная страница*/
+#main {
+    padding: 5px 0px;
+}
+#main div.slides {
+    max-height: 250px;
+}
+#main div.slides div.items {
+
+}
+#main div.slides div.item{
+    max-height: 260px;
+    overflow: hidden;
+}
+#main div.slides div.item img{
+    width: 100%;
+}
+/*Модуль блоки*/
+div.module {
+    margin: 5px 0 30px;
+}
+div.module h2,div.module h3.min-title {
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+}
+div.module h2 a,div.module h3 a {
+    padding: 0px 10px 0px 0px;
+    position: relative;
+    background:#ffffff;
+    z-index: 200;
+}
+div.module h2 .line-br {
+    border-bottom: 1px solid #a5a5a5;
+    position: absolute;
+    top: 15px;
+    width: 100%;
+    left: 155px;
+}
+div.module h3.min-title {
+    font-size: 15px;
+}
+div.module div.row {
+    margin: 0px -5px;
+}
+div.module div.goods {
+    padding: 5px;
+}
+div.module div.goods div.item {
+    background: #F3EDEB;
+    min-height: 320px;
+    border-radius: 3px;
+    padding: 0px 8px 20px;
+}
+div.module div.goods div.images {
+    height: 300px;
+    overflow: hidden;
+    margin: 0px -8px 0px -8px;
+}
+div.module div.goods div.title {
+    font-size: 13px;
+    margin: 5px 0px;
+    text-align: center;
+    text-transform: uppercase;
+}
+div.module div.goods div.title span.min-title {
+    color: #5c5c5c;
+    font-size: 12px;
+    margin: 0 5px;
+    text-align: left;
+    display: block;
+}
+div.module div.goods div.images img{
+    width: 100%;
+
+}
+div.module div.goods div.item div.price {
+    color: #8b0000;
+    font-size: 20px;
+    margin: 0px 0px 15px 5px;
+    text-align: center;
+}
+div.module div.goods div.item div.price span.price-discount{
+    font-size: 18px;
+    font-weight: normal;
+    margin: 0px 0px 0px 10px;
+    text-decoration: line-through;
+    color: #272727;
+}
+div.module div.goods div.item div.button_green {
+    border-radius: 0px;
+    margin: 5px auto;
+    padding: 8px 0px 3px;
+    width: 70%;
+}
+div.module div.goods div.item div.button_green div {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+/*Хлебная крошка*/
+.breadcrumb {
+    margin-top: 5px;
+}
+.breadcrumb > .active {
+    color: #626262;
+}
+span.grey{
+    color: #626262;
+}
+/*Сортировка*/
+div.sort-filter {
+    color: #626262;
+    font-size: 12px;
+    margin: 0;
+}
+div.sort-filter span.grey {
+    cursor: pointer;
+    margin: 0px 5px;
+    border-bottom: 1px dashed #626262;
+}
+div.sort-filter span:hover {
+    color: #8b0000;
+    border-bottom: none;
+}
+/*Карточка товара*/
+#good{
+
+}
+#good div.block-1 {
+
+}
+#good div.block-2 {
+
+}
+#good div.block-1 div.image{
+    background: #f3edeb none repeat scroll 0 0;
+    height: 345px;
+    max-width: 275px;
+    overflow: hidden;
+    padding: 5px 0px;
+    text-align: center;
+}
+#good div.block-1 div.images {
+    margin: 5px 0px 0px;
+}
+#good div.block-1 div.images div.items {
+
+}
+#good div.block-1 div.images div.item {
+    display: inline-block;
+    height: 70px;
+    margin: 0px 5px 5px 0px;
+    overflow: hidden;
+    vertical-align: top;
+    width: 85px;
+}
+#good div.block-1 div.images div.item.open,#good div.block-1 div.images div.item:hover {
+    outline: 3px solid #a70303;
+}
+#good div.block-1 div.images div.item.margin-right {
+    margin-right: 0px;
+}
+/*Блок с право*/
+#good div.block-2 div.price {
+    padding: 35px 0px 20px;
+    font-size: 28px;
+}
+#good div.block-2 div.price.disc {
+    color: #5e5e5e;
+    font-size: 20px;
+    text-decoration: line-through;
+    display: inline-block;
+}
+#good div.block-2 .price.discount {
+    font-size: 28px;
+    display: inline-block;
+    margin: 0px 0px 0px 15px;
+}
+#good div.block-2 div.block {
+
+}
+#good div.block-2 div.block div.button_vinous {
+    border-radius: 0;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    width: 185px;
+}
+#good div.block-2 div.block span.buy {
+    display: inline-block;
+    margin-left: 15px;
+}
+#good div.block-2 div.options {
+    margin: 5px 0px;
+}
+#good div.block-2 div.options div.title{
+}
+#good div.block-2  div.description {
+}
+#good div.block-2  div.description h2{
+}
+#good div.block-2  div.description div.text {
+}
+/*Корзина*/
+#basket {
+
+}
+#basket div.good-basket {
+    margin: 0 ;
+}
+#basket div.good-basket div.item{
+    background: #f3edeb;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+#basket div.good-basket div.item div.block {
+    position: relative;
+}
+#basket div.good-basket div.item div.price {
+    color: #272727;
+    font-size: 18px;
+}
+#basket div.good-basket div.item div.title {
+    font-size: 13px;
+    text-transform: uppercase;
+}
+#basket div.good-basket div.item div.art {
+    color: #5c5c5c;
+    font-size: 11px;
+    margin: 10px 0px 0px;
+}
+#basket div.good-basket div.item div.min-title {
+    color: #5c5c5c;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+#basket div.good-basket div.image {
+    max-height: 115px;
+    overflow: hidden;
+}
+#basket div.good-basket div.image img{
+    width: 80px;
+}
+#basket div.good-basket button.close {
+    position: absolute;
+    right: 25px;
+    z-index: 100;
+}
+/*Оформить заказ*/
+#basket div.order-form {
+
+}
+/*Итого*/
+#basket div.total {
+
+}

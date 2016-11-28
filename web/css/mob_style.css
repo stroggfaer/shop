@@ -1,0 +1,166 @@
+/*Планшет разрешения 800x1043*/
+@media only screen and (min-width: 137px) and (max-width: 1043px) {
+
+}
+
+@media only screen and (max-width: 991px) {
+     #header div.menu-content {
+         display: none;
+         position: absolute;
+         top: 70px;
+         z-index: 100;
+         left: -17px;
+
+     }
+    #header div.menu div.item {
+        background: #ae1515;
+        border-bottom: 1px solid #8c0606;
+        float: none;
+        height: 100%;
+        width: 100%;
+    }
+    #header div.menu div.item a.i {
+        padding: 10px 0px 10px 15px;
+        text-align: left;
+    }
+    #header div.title {
+         font-size: 20px;
+     }
+    div.module div.goods div.title span.min-title {
+        margin: 0px;
+    }
+    #header div.menu-bar {
+        display: block;
+    }
+    #header div.cart {
+        float: right;
+        min-width: 245px;
+    }
+    div.sidebar div.row {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+    div.sidebar div.block form.search {
+        padding: 15px 0 0;
+    }
+    #footer .footer-menu {
+        display: none;
+    }
+    #footer div.row div.bottom .copyright {
+        text-align: center;
+        font-size: 12px;
+    }
+    div.module div.goods div.title {
+        text-align: left;
+    }
+    /*Карточка товара*/
+    #good div.block-1 div.image {
+        max-width:100%
+    }
+}
+@media only screen and (max-width: 580px) {
+    #header div.title {
+        font-size: 18px;
+    }
+    #header div.cart.desktop {
+       display: none;
+    }
+    #header div.row div.col-xs-5 {
+        width: 240px;
+    }
+    #header div.cart.mobile {
+        display: block;
+        min-width: 80px;
+        padding-right: 19px;
+    }
+    #header div.cart.mobile a.icon-cart {
+        position: relative;
+        margin: 0px;
+        padding: 0px;
+        font-size: 15px;
+        height: 52px;
+        background-position: center top;
+    }
+    #header div.cart.mobile div.count {
+        background: #ff4500;
+        border-radius: 100%;
+        font-family: caption;
+        font-size: 15px;
+        padding: 0px 7px;
+        position: absolute;
+        right: 10px;
+        top: -7px;
+    }
+    #header div.cart.mobile div.c {
+        padding-top: 30px;
+        text-align: center;
+    }
+
+}
+@media only screen and (max-width: 350px) {
+    #header div.row div.col-xs-5 {
+        width: 180px;
+    }
+    #header div.title {
+        font-size: 18px;
+        margin: 10px 0px 0px;
+    }
+}
+@media only screen and (max-width: 355px) {
+    #good div.block-2 div.block div.button_vinous {
+        width: 100%;
+    }
+    #good div.block-2 div.block span.buy {
+        margin: 10px 0px 0px;
+    }
+}
+/*Модуль*/
+@media only screen and (max-width: 767px) {
+    div.module div.goods {
+        display: inline-block;
+        width: 50%;
+    }
+    div.module div.goods div.images {
+        height: 100%;
+        margin: 0px 10px 0px 0px;
+        width: 40%;
+        display: inline-block;
+        min-width: 99px;
+        width: 20%;
+    }
+    div.module div.goods div.title,
+    div.module div.goods div.item div.price {
+        text-align: left;
+    }
+    div.module div.goods div.item {
+        min-height: 100%;
+        padding: 10px;
+        min-width: 337px;
+    }
+
+    div.module div.goods div.item div.block {
+        display: inline-block;
+        vertical-align: top;
+    }
+    div.module div.goods div.item div.button_green {
+        width: 100%;
+    }
+    div.module div.goods.left-hidden {
+        display: none;
+    }
+}
+/*Корзина*/
+@media only screen and (max-width: 560px) {
+    #basket div.good-basket div.image {
+       width: 100px;
+    }
+    #basket div.good-basket div.item div.block {
+        width: 75%;
+    }
+}
+@media only screen and (max-width: 412px) {
+    #basket div.good-basket div.item div.block {
+        min-width: 200px;
+        width: 65%;
+    }
+}

@@ -1,5 +1,6 @@
 <?php
-
+use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 
 ?>
 
@@ -26,9 +27,18 @@
         <?php endforeach; ?>
     </div> <!--Список товара-->
     <div class="row">
+    <?php $form = ActiveForm::begin([
+        'id'                     => 'order-form',
+        'enableAjaxValidation'   => true,
+        'enableClientValidation' => true,
+        'validateOnBlur'         => false,
+        'validateOnType'         => false,
+        'validateOnChange'       => false,
+        'validateOnSubmit'       => true,
+    ]); ?>
         <!--Офрмить заказ-->
         <div class="order-form col-sm-7">
-            <?=\app\components\basket\WBasketOrderForm::widget(['model'=>$model])?>
+            <?=\app\components\basket\WBasketOrderForm::widget(['model'=>$model,'form'=>$form])?>
         </div><!--/Офрмить заказ-->
         <div class="total col-sm-5">
             <table class="table">
@@ -46,7 +56,9 @@
                 </tr>
             </table>
             <div class="button_vinous"><div>Оформить</div></div>
+            <?= Html::submitButton('Register', ['class' => 'btn btn-primary', 'name' => 'order', 'value'=>'true']) ?>
         </div>
+     <?php ActiveForm::end(); ?>
     </div>
     <?php else:?>
        <div class="text">Корзина пуста!</div>

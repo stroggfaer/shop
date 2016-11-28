@@ -1,0 +1,659 @@
+a:link, a:visited {
+    color: #1E5584;
+    text-decoration: none;
+}
+a:hover {
+    color: #A70303;
+    text-decoration: underline;
+}
+
+a.grey:hover {
+    color: #FF8040;
+    text-decoration: none;
+    border-bottom: 1px solid #FF8040;  
+}
+
+a.black, a.black:link, a.black:visited {
+    color: #000000;
+    text-decoration: none;
+    border-bottom: #B3B3B3 1px solid;
+}
+a.black:hover {
+    color: #8C0606;
+    text-decoration: none; 
+    border: none;  
+}
+
+a.gray, a.gray:link, a.gray:visited {
+    color: #8f9999;
+    text-decoration: none;
+    border: none;
+}
+a.gray:hover {
+    color: #666666;
+    text-decoration: none;
+    border-bottom: #666666 1px solid;
+}
+
+a.cofe{
+    color: #775931;
+    text-decoration: none;
+}
+a.cofe:hover {
+    color: #ff8000;
+    text-decoration: none;
+    border: none;   
+}
+/*?????????????? (?????. ????)*/
+a.brown{
+    color: #74562e;
+    text-decoration: none;
+    border-bottom: 1px solid #d4b68e ;
+}
+a.brown:hover {
+    color: #9f8159;
+    text-decoration: none;
+    border-bottom: 1px solid #9f8159 ;
+}
+/*Белый цвет*/
+a.white{
+    color: #ffffff;
+    text-decoration: none;
+
+}
+a.white:hover {
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: 1px solid #ffffff ;
+}
+/*?????? ??? ????????? c ?????????*/
+a.lin {
+    color: #895c34;
+    font-weight: bold;
+    transition: color 200ms linear;
+     -webkit-transition: color 200ms linear;
+      -moz-transition: color 200ms linear;
+       -o-transition: color 200ms linear;
+    border-bottom: 1px solid #ddb088;
+}
+a.lin:hover {
+    color: #FF8000;
+    border-bottom: 1px solid #FF8000;
+    text-decoration: none;
+} 
+/*??? ???????*/
+a.nobor:link, a.nobor:visited {
+    color: #1E5584;
+    text-decoration: none;
+}
+a.nobor:hover {
+    color: #D5120D;
+    text-decoration: none;   
+}
+/*?????*/
+a.dashed:link, a.dashed:visited {
+    color: #1E5584;
+    text-decoration: none;
+    border-bottom: #9FB6CB 1px dashed;
+}
+a.dashed:hover {
+    color: #ff8000;
+    text-decoration: none; 
+    border:none;  
+}
+/*?????*/
+a.dotted:link, a.dotted:visited {
+    color: #008dbc;
+    text-decoration: none;
+    border-bottom: #7fc6dd 1px dotted;
+}
+a.dotted:hover, a.dotted.open {
+    color: #000000;
+    text-decoration: none;
+    border-bottom: #7f7f7f 1px dotted;
+}
+/*????????*/
+p {
+    padding: 0px 0px 5px 0px;
+    margin: 0px;
+}
+/*???????????*/
+img {
+    border: 0px;
+    padding: 0px;
+    margin: 0px;
+    vertical-align: top;
+}
+img.ad {
+    height: 100%;
+}
+img.opac:hover {
+    opacity: 0.80;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+     -khtml-opacity: 0.80;
+      -moz-opacity: 0.80;
+    transition: 0.2s 0.01s ease-in;
+     -moz-transition: all 0.2s 0.01s ease-in;
+      -o-transition: all 0.2s 0.01s ease-in;
+       -webkit-transition: all 0.2s 0.01s ease-in;
+}
+
+/*?????*/
+.text {
+    margin: 20px 0px;
+}
+.text-t {
+    font-size: initial;
+    word-spacing: 5px;
+    line-height: 22px; 
+}  
+/*?????*/
+.text-a {
+    font-family: verdana;
+    font-size: 16px;
+    line-height: 22px;
+}  
+/*??????? ????????*/
+.text-m {
+    font-family: verdana;
+    font-size: 16px;
+    line-height: 22px;
+    margin: 25px 0px;
+}
+.grey_text {
+    color: #abb7b7;
+}
+.hidden {
+    display: none;
+}
+.hidden1 {
+    display: none !important;
+}
+.clear {
+    font-size: 0px;
+    clear: both;
+}
+/*???????????,PS,????????*/
+span.ps {
+   color: #9EB9BA;
+}
+:focus {
+    outline: none;
+}
+/*Размер Заголовок*/
+h1.size-1 {
+    font-size: 25px !important;
+}
+h1.size-2 {
+    font-size: 28px;
+}
+h1.size-3 {
+    font-size: 28px;
+}
+/*?????????*/
+h1.name {
+    color: #3A3A38;
+    font-family: Trebuchet MS;
+    font-size: 28px;
+    margin: 13px 0 0 -10px;
+    padding: 7px 0;
+    line-height: normal;
+}
+
+h2.name {
+    color: #2D2D2D;
+    font-family: Trebuchet MS;
+    font-size: 28px;
+    margin: 7px 0 0;
+    line-height: normal;
+}
+h4.name {
+    font-family: caption;
+    font-size: 20px;
+}
+/*???????? */  
+h1.title {
+    font-family: Verdana;
+    font-size: 33px;
+    font-weight: normal;
+    line-height: normal;
+}
+h2.title {
+    font-size: 18px;
+    line-height: normal;
+    margin: 0px 0px 8px;
+}
+h4.title {
+    font-family: Verdana;
+    font-size: 20px;
+}
+/* ????.????? ????????, ?????????, ???, ??????, ?????, ??????????????,  */
+div.title {
+    font-size: 17px;
+    font-weight: bold;
+    padding: 5px 0px 5px 0px;
+}
+div.name {
+
+}
+div.error {
+    color: red;
+}
+div.suscess {
+
+}
+div.warning {
+
+}
+div.social {
+   margin: 10px 0;
+}
+
+/*???????? ajax*/
+#load_row {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9990;
+    width: 100%;
+    height: 100%;
+    background: rgb(255, 255, 255);
+    background: rgba(255,255,255,0.4 );
+    display:none;
+}
+#load_row div.row {
+    height: auto;
+    width: 100%;
+    position:absolute;
+    left: 40%;
+    right: 50%;
+    top:50%;
+    bottom: 50%;
+    z-index: 9998;
+}
+#load_row div.load {
+    background: url("/files/images/loader.gif") no-repeat ;
+    height: 36px;
+    width: 36px;
+}
+/*??????????? ???? */
+#popup_box {
+    background: rgb(0, 0, 0);
+    background: rgba(0,0,0,0.4 );
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9990;
+    width: 100%;
+    height: 100%;
+    display:none;
+}
+#popup_box div.item {
+    background: #FFFFFF;
+    height: auto;
+    padding: 12px 0 0;
+    max-width: 562px;
+    width: 100%;
+    padding: 18px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin:-100px 0px 0px -300px;
+    border-radius: 5px;
+    z-index: 9998;
+}  
+#popup_box div.item div.logo img{
+   width: 100%;
+}
+#popup_box div.close {
+    position: absolute;
+    right: -29px;
+    top: -24px;
+    cursor: pointer;
+}
+#popup_box div.close img {
+    width: 28px; 
+}
+/*?????? ?????*/
+div.forma {
+  margin: 22px 0 188px 0;
+}
+div.forma div {
+  margin: 5px 0px 5px 0px;
+}
+div.forma div input.name,div.forma div input.email,div.forma div input.tema,div.forma div input.phone {
+  width: 30%;
+  padding: 5px;
+}
+
+div.forma div textarea {
+  padding: 5px;
+  width: 50%;
+}
+div.forma label{
+  color: #5f5f5f;
+  font-size: 16px;
+}
+div.forma div.row {
+    width: 52%;
+}
+div.forma div.row div.cap {
+    float: left;
+    margin: 8px 0px 0px 0px;
+}
+div.forma div.row div.but {
+    float: right;
+    height: 58px;
+}
+
+
+div.forma div.row div.cap input { 
+    padding: 5px;
+    width: 35px;
+    margin: 0px 10px 0px 5px   
+}
+div.forma div.row div.cap span.update {
+    font-size: 12px;
+}
+div.forma div.row div.cap img {
+    width: 45px;
+}
+/*?????????? ??????, ??????? ?????*/
+input.button {
+    background: #a4865e;
+    border-radius: 3px;
+    color: #fff;
+    padding: 5px 8px;
+}
+input.button:hover {
+    background: #FF8000;
+    cursor: pointer;
+}
+input.checkbox {
+    margin: 0px 5px 0px 0px;
+    position: relative;
+    top: 2px;
+}
+input.radio {
+
+}
+/*?????? 1 (????????)*/
+input.button_cofe {
+    background: #a4865e;
+    border-bottom: 3px solid #8e7048;
+    border-radius: 3px;
+     -moz-border-radius: 3px;
+	    -webkit-border-radius: 3px;
+    color: #ffffff;
+    padding: 5px 8px;
+}
+input.button_cofe:hover {
+    background: #b79971;
+    border-bottom: 3px solid #a5875f;
+}
+/*?????? 2 (???????)*/
+input.button_gl {
+    background: none repeat scroll 0 0 #d5120d;
+    border-bottom: 2px solid #8b0401;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+	  -webkit-border-radius: 3px;
+    color: #fff;
+    font-weight: bold;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+input.button_gl:hover {
+    background: #c80500;
+}   
+/*?????? 3 (???????)*/ 
+button.button_gl {
+    background: #d5120d;
+    border-bottom: 2px solid #8b0401;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+	  -webkit-border-radius: 3px;
+    color: #fff;
+    font-weight: bold;
+    margin: 5px 0 0;
+    padding: 5px 10px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    cursor: pointer;
+}
+button.button_gl:hover {
+    background: #c80500;
+} 
+/*??????(???????)*/
+input.button_green{
+    background: #249E14;
+    border-bottom: 2px solid #0e7700;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+	  -webkit-border-radius: 3px;
+    color: #fff;
+    font-weight: bold;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+input.button_green:hover {
+    background: #1a940a;
+} 
+button.button_green {
+    background: #1E8902;
+    border-bottom: 2px solid #0e7700;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+	  -webkit-border-radius: 3px;
+    color: #fff;
+    font-weight: bold;
+    margin: 5px 0 0;
+    padding: 5px 10px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    cursor: pointer;
+}
+button.button_green:hover {
+    background: #1a940a;
+} 
+/*?????? ???????*/
+div.button a.button, 
+span.button a.button {
+    background: #249E14;
+    border-radius: 3px;
+     -moz-border-radius: 3px;
+	  -webkit-border-radius: 3px;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 8px 30px 8px 28px;
+    border-bottom: 2px solid #0e7700;
+}
+div.button a.button:hover,
+span.button a.button:hover {
+    background: #1a940a;
+    text-decoration: none;
+}
+/*?????? ???? ??????? */
+div.button a.button.free {
+    background: #3399FF;
+    border-bottom: 2px solid #147ae0;
+    padding: 8px 18px;
+} 
+div.button a.button.free:hover {
+    background: #268ce1;
+}
+/*?????? ???? ?????.*/
+div.button a.button.paid {
+    background: #FFA500;
+    border-bottom: 2px solid #e78d00;
+    padding: 8px 19px;
+} 
+div.button a.button.paid:hover {
+    background: #faa000;
+}
+/*Зленый*/
+div.button_green {
+     background: #1b840d;
+     border-bottom: 2px solid #006300;
+     border-radius: 3px;
+     padding: 5px 0px 2px;
+     width: 110px;
+     cursor: pointer;
+ }
+div.button_green:hover {
+    background: #006300;
+}
+div.button_green div {
+    color: #fff;
+    text-align: center;
+}
+/*Бордовый*/
+div.button_vinous {
+    background: #8C0606;
+    border-bottom: 2px solid #7a0703;
+    border-radius: 3px;
+    padding: 8px 0px 6px;
+    cursor: pointer;
+}
+div.button_vinous:hover {
+    background: #a82222;
+}
+div.button_vinous div {
+    color: #fff;
+    text-align: center;
+}
+/*?????? Ajax ?????????? ???*/
+div.AjaxButton {
+   margin: 15px auto;
+   width: 300px; 
+}
+div.AjaxButton button.AjaxButton {
+   cursor: pointer;
+   padding: 6px 10px 6px 10px;
+   border-radius: 3px;
+   -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+   background: none repeat scroll 0 0 #ffffff;
+   border: 1px solid #9c6f47;
+   color: #a87b53;
+   font-weight: bold;
+   height: 35px;
+   width: 250px;
+}
+div.AjaxButton button.AjaxButton:hover {
+    border: 1px solid #ff8000;
+    color: #ff8000; 
+}
+div.Ajaxloader {
+    margin: 25px auto;
+    width: 55px; 
+}
+div.Ajaxloader div.loader {
+    background: url("/files/images/ajax-loader.gif") no-repeat;
+    height: 11px;
+}
+/*???????????? ?????????*/
+div.pagination{
+    text-align:center;
+    margin: 20px;
+}
+a.nav_active{
+    border: 1px solid #ccc;
+    background-color: #775931;
+    color: #fff;
+    padding: 5px 7px;
+    margin: 0 2px;
+}
+a.nav_link{
+    padding: 5px 7px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    margin: 0 5px;
+    color: #777;
+}
+a.nav_link:hover{
+    background-color: #775931;
+    color: #fff;
+}
+/*Затемненый обасть*/
+#br-shadow {
+    background:#000000;
+    background:rgba(0,0,0,.55);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 98;
+    cursor: pointer;
+    display: none;
+}
+#nav-toggle {position: relative; display: inline-block; width:35px; height:25px;}
+#nav-toggle span { position: absolute; left: 0; top: 10px; }
+
+#nav-toggle span,
+#nav-toggle span:before,
+#nav-toggle span:after {
+    position: absolute;
+    display: block;
+    content: '';
+    height: 5px;
+    width: 35px;
+    background: white;
+    border-radius: 1px;
+    cursor: pointer;
+}
+#nav-toggle span:before {
+    top: -10px;
+}
+#nav-toggle span:after {
+    bottom: -10px;
+}
+
+/* Добавим анимацию всех свойств для блоков нашей иконки */
+#nav-toggle span, #nav-toggle span:before, #nav-toggle span:after {
+    transition: all 500ms ease-in-out;
+}
+
+/* Центральный блок делаем прозрачным */
+#nav-toggle.active span {
+    background-color: transparent;
+}
+
+/* Смещаем псевдо-элементы в центр иконки (на место основного блока) */
+#nav-toggle.active span:before, #nav-toggle.active span:after {
+    top: 0;
+}
+
+/* Наклоняем псевдо-элементы под углом 45 градусов, но в разные стороны */
+#nav-toggle.active span:before {
+    transform: rotate(45deg);
+}
+#nav-toggle.active span:after {
+    transform: rotate(-45deg);
+}
+/*Таблица для товара*/
+table.goods {
+
+}
+table.goods th{
+
+}
+table.goods td.num{
+    width: 10px;
+}
+table.goods td.image img{
+    width: 50px;
+}
+table.goods td.title{
+
+}
+table.goods td.price{
+
+}
+table.goods td.action{
+
+}

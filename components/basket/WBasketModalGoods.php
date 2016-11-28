@@ -29,7 +29,7 @@ class WBasketModalGoods extends Widget
 
             <div class="table-responsive" id="modal-table">
               <?php if(!empty($this->basket)): ?>
-                <table class="table table-hover table-striped">
+                <table class="table table-hover table-striped basket-modal-goods">
                     <thead>
                     <tr>
                         <th>Фото</th>
@@ -42,11 +42,11 @@ class WBasketModalGoods extends Widget
                     <tbody>
                     <?php foreach($this->basket as $id => $item):?>
                         <tr>
-                            <td>+</td>
+                            <td><img src="/files/goods/big1.jpg" alt="" class="img-rounded img"> </td>
                             <td><?= $item['name']?></td>
                             <td><?= $item['count']?></td>
                             <td><b><?= $item['price']?> р.</b></td>
-                            <td><span onclick="return deleteBasket('<?= $id?>');" class="glyphicon glyphicon-remove text-danger del-item close" aria-hidden="true"></span></td>
+                            <td><span onclick="return deleteBasket('<?= $id?>');" class="glyphicon glyphicon-remove del-item close text-danger" aria-hidden="true"></span></td>
                         </tr>
                     <?php endforeach?>
                     <tr>
