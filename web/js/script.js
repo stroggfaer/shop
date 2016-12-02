@@ -38,6 +38,8 @@ $(document).on('click','div.navbar div.groups',function(){
   //  $(this).children('div.i').toggle();
   //  return false;
 });
+
+
 /*Чекпоинт*/
 $(window).resize(function() {
     var winWidth = $(window).width();
@@ -47,4 +49,24 @@ $(window).resize(function() {
     }else if(winWidth <= 991){
         $('#header div.menu-content').css('display','none');
     }
+});
+
+
+// Выбор доставки;
+$(document).on("change","#address-delivery_id input", function(event) {
+    event.preventDefault();
+    $.pjax.reload({
+        method: "POST",
+        url: '/ajax-basket/result-money',
+        container: "#pjax-delivery_id",
+        replace: false,
+        data: {'delivery_id': $(this).val()},
+        success:function(data){
+            console.log("Success works!")
+        },
+    });
+});
+
+$(document).on('ready pjax:success', function() {
+    // alert('+');
 });

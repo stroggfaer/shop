@@ -119,7 +119,7 @@ $session = Yii::$app->session;
     'size' => 'modal-lg',
     'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
         <a href="/basket/" class="btn btn-success no-border" style="color:#fff;">Оформить заказ</a>
-        <button type="button" class="btn btn-danger" onclick="return deleteBasket();">Очистить корзину</button>'
+        <button type="button" class="btn btn-danger" onclick="return clearBasket();">Очистить корзину</button>'
 ]);
 
 \yii\bootstrap\Modal::end();

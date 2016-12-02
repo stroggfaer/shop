@@ -1,7 +1,10 @@
 <?php
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+use yii\widgets\Pjax;
 
+
+//print_arr($model->resultmoney);
 ?>
 
 <!---Карточка товара-->
@@ -41,22 +44,10 @@ use yii\helpers\Html;
             <?=\app\components\basket\WBasketOrderForm::widget(['model'=>$model,'form'=>$form])?>
         </div><!--/Офрмить заказ-->
         <div class="total col-sm-5">
-            <table class="table">
-                <tr>
-                    <td>Стоимость</td>
-                    <td><b>13 516 руб.</b></td>
-                </tr>
-                <tr>
-                    <td>Доставка</td>
-                    <td>бесплатно</td>
-                </tr>
-                <tr>
-                    <td>ИТОГО</td>
-                    <td><b>13 516 руб.</b></td>
-                </tr>
-            </table>
-            <div class="button_vinous"><div>Оформить</div></div>
-            <?= Html::submitButton('Register', ['class' => 'btn btn-primary', 'name' => 'order', 'value'=>'true']) ?>
+            <?php Pjax::begin(['id'=>'pjax-delivery_id', 'clientOptions' => ['method' => 'POST'], 'timeout' => false,'enablePushState'=>true]); ?>
+                <?=\app\components\basket\WBasketResult::widget(['model'=>$model->getResultMoney(false,1001)])?>
+            <?php Pjax::end(); ?>
+            <?= Html::submitButton('Оформить', ['class' => 'btn button_vinous size-1', 'name' => 'order', 'value'=>'true']) ?>
         </div>
      <?php ActiveForm::end(); ?>
     </div>

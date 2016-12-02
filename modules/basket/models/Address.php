@@ -1,8 +1,9 @@
 <?php
 
 namespace app\modules\basket\models;
-
-
+use app\modules\basket\models\OrderGoods;
+use app\modules\basket\models\OrderItem;
+use Yii;
 /**
  * This is the model class for table "address".
  *
@@ -18,7 +19,6 @@ namespace app\modules\basket\models;
  */
 class Address extends \yii\db\ActiveRecord
 {
-   // public $phone;
     /**
      * @inheritdoc
      */
@@ -72,21 +72,70 @@ class Address extends \yii\db\ActiveRecord
             'status' => 'Status',
         ];
     }
-
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrderItems()
+    {
+        return $this->hasMany(OrderItem::className(), ['address_id' => 'id']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDeliveryOne()
+    {
+        return $this->hasOne(Delivery::className(), ['id' => 'delivery_id']);
+    }
     // Загрузка выбор доставка;
-    public function getDelivery()
+    public static function getDelivery()
     {
        return Delivery::find()->where(['status'=> 1])->asArray()->orderBy('id asc')->all();
     }
 
-
-
     // Оформить заказ;
-    /*
-    public function save()
+    public static function getOrderItem($id)
     {
-
-
-    }*/
+        $session = Yii::$app->session;
+        $session->open();
+        // Добавляем товар;
+        foreach($session['basket'] as $good_id => $value) {
+            $orderGoods = new OrderGoods();
+            $orderGoods->address_id = $id;
+            $orderGoods->goods_id = $good_id;
+            $orderGoods->save();
+        }
+        $total_money = Address::getResultMoney($id);
+        // Добавляем номер заказа;
+        $orderItem = new OrderItem();
+        $orderItem->address_id = $id;
+        $orderItem->price = $total_money['total_money'];
+        $orderItem->type = 1;
+        $orderItem->date = date('Y-m-d H:i');
+        $orderItem->status = 1;
+        $orderItem->save(false);
+        return $orderItem->id;
+    }
+    // Подсчет суммы доставки;
+    public static function getResultMoney($address_id = false, $delivery_id = false)
+    {
+        $session = Yii::$app->session;
+        $session->open();
+        // Рассчет результат доставки;
+        if(!empty($address_id) && empty($delivery_id)) {
+            // Загрузка доставка;
+            $delivery_price = Delivery::find()
+                ->select(['address.id AS id', 'delivery.price','delivery.title'])
+                ->leftJoin(Address::tableName(), 'delivery.id = address.delivery_id')
+                ->where(['address.status' => 1, 'delivery.status' => 1, 'address.id' => $address_id])->asArray()->one();
+        }
+        // Рассчет результат доставки;
+        if(empty($address_id) && !empty($delivery_id)) {
+            $delivery_price = Delivery::find()->where(['status' => 1, 'id' => $delivery_id])->asArray()->one();
+        }
+        // Расчет цены;
+        $delivery_price['total_money'] = (!empty($delivery_price) && isset($delivery_price) && $delivery_price['price'] > 0 ? $session['basket.money'] + $delivery_price['price'] : $session['basket.money']);
+        $delivery_price['money'] =  $session['basket.money'];
+        return  $delivery_price;
+    }
 }
 

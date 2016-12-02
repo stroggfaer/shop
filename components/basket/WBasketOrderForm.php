@@ -4,10 +4,7 @@ namespace app\components\basket;
 use yii\base\Widget;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
-
-
-
-
+/*--------- Форма отправка заявки --------*/
 class WBasketOrderForm extends Widget
 {
 
@@ -25,7 +22,6 @@ class WBasketOrderForm extends Widget
         parent::init();
     }
     public function run(){
-
         ?>
         <div class="panel panel-default">
             <div class="panel-heading">Адресс доставки</div>
@@ -35,12 +31,12 @@ class WBasketOrderForm extends Widget
                 <?= $this->form->field($this->model, 'email')->textInput(['autofocus' => true ,'class'=>'form-control placeholder','placeholder'=>"Email",'data-text'=>"Email"])->label(false)?>
                 <?= $this->form->field($this->model, 'address')->textInput(['autofocus' => true ,'class'=>'form-control placeholder','placeholder'=>"Адрес",'data-text'=>"Адрес"])->label(false)?>
                 <?= $this->form->field($this->model, 'comments')->textarea(['rows' => 2, 'cols' => 5,'class'=>'form-control placeholder string','placeholder'=>"Комментарий",'data-text'=>"Комментарий"])->label(false);?>
-                <?= $this->form->field($this->model, 'delivery_id')->radioList($this->model->delivery,[
-                    'item' => function ($index, $label, $name, $checked, $value) {
-                        $checked = ($index === 0 ? 'checked' : '');
-                        return '<div class="radio form-group"><label>'.Html::radio($name, $checked, ['value' => $label['id']]).$label['title'].' - <b>'.$label['price'].'</b></label></div>';
-                    },
-                ])->label('Способ Доставки'); ?>
+                    <?= $this->form->field($this->model, 'delivery_id')->radioList($this->model->delivery,[
+                        'item' => function ($index, $label, $name, $checked, $value) {
+                            $checked = ($index === 0 ? 'checked' : '');
+                            return '<div class="radio form-group"><label>'.Html::radio($name, $checked, ['value' => $label['id']]).$label['title'].' - <b>'.$label['price'].'</b></label></div>';
+                        },
+                    ])->label('Способ Доставки'); ?>
             </div>
         </div>
         <?php

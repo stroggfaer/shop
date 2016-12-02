@@ -31,7 +31,7 @@ class OrderItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['address_id', 'good_id', 'type', 'status'], 'integer'],
+            [['address_id','type', 'status'], 'integer'],
             [['price'], 'number'],
             [['date'], 'safe'],
         ];
@@ -45,7 +45,6 @@ class OrderItem extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'address_id' => 'Address ID',
-            'good_id' => 'Good ID',
             'price' => 'Price',
             'type' => 'Type',
             'date' => 'Date',
@@ -53,3 +52,4 @@ class OrderItem extends \yii\db\ActiveRecord
         ];
     }
 }
+

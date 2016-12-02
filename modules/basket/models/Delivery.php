@@ -47,4 +47,8 @@ class Delivery extends \yii\db\ActiveRecord
             'status' => 'Status',
         ];
     }
+    public function getAddresses()
+    {
+        return $this->hasMany(Address::className(), ['delivery_id' => 'id']);
+    }
 }

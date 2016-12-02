@@ -517,12 +517,19 @@ div.button_vinous {
     padding: 8px 0px 6px;
     cursor: pointer;
 }
-div.button_vinous:hover {
+div.button_vinous:hover,button.button_vinous:hover  {
     background: #a82222;
 }
 div.button_vinous div {
     color: #fff;
     text-align: center;
+}
+button.button_vinous {
+    color: #fff !important;
+    background: #8C0606;
+}
+button.button_vinous.size-1 {
+    width: 100%;
 }
 /*?????? Ajax ?????????? ???*/
 div.AjaxButton {

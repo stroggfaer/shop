@@ -3,6 +3,7 @@ namespace app\controllers;
 use app\modules\index\controllers\AppController;
 use app\modules\catalog\models\Goods;
 use app\modules\basket\models\Basket;
+use app\modules\basket\models\Address;
 use Yii;
 
 
@@ -76,6 +77,14 @@ class AjaxBasketController extends AppController
 
     }
 
+    // Пересчет суммы корзины;
+    public function actionResultMoney()
+    {
+        $request = Yii::$app->request;
+        if ($request->post('delivery_id')) {
+            $model = Address::getResultMoney(false,intval($request->post('delivery_id')));
+            return \app\components\basket\WBasketResult::widget(['model'=>$model]);
+        }
 
-
+    }
 }
