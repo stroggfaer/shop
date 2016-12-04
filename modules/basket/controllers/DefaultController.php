@@ -45,7 +45,5 @@ class DefaultController extends Controller
             $session->destroy('basket');
             return $this->redirect(['/basket/']);
         }
-
-
     }
 }
