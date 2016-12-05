@@ -4,6 +4,7 @@ namespace app\components\basket;
 use yii\base\Widget;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+use app\modules\index\models\MyHelper;
 /*--------- Форма отправка заявки --------*/
 class WBasketOrderForm extends Widget
 {
@@ -34,7 +35,7 @@ class WBasketOrderForm extends Widget
                     <?= $this->form->field($this->model, 'delivery_id')->radioList($this->model->delivery,[
                         'item' => function ($index, $label, $name, $checked, $value) {
                             $checked = ($index === 0 ? 'checked' : '');
-                            return '<div class="radio form-group"><label>'.Html::radio($name, $checked, ['value' => $label['id']]).$label['title'].' - <b>'.$label['price'].'</b></label></div>';
+                            return '<div class="radio form-group"><label>'.Html::radio($name, $checked, ['value' => $label['id']]).$label['title'].' - <b>'.MyHelper::money($label['price']).' p.</b></label></div>';
                         },
                     ])->label('Способ Доставки'); ?>
             </div>

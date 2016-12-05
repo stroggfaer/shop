@@ -2,7 +2,7 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\Pjax;
-
+use app\modules\index\models\MyHelper;
 
 //print_arr($model->resultmoney);
 ?>
@@ -21,7 +21,7 @@ use yii\widgets\Pjax;
                 <div class="block col-xs-10">
                     <div class="title"><?=$item['name']?></div>
                     <div class="min-title">women</div>
-                    <div class="price"><?=$item['price']?> р.</div>
+                    <div class="price"><?=MyHelper::money($item['price'])?> р.</div>
                     <div class="art">Количество: <b><?=$item['count']?></b></div>
                 </div>
                 <div class="clear"></div>

@@ -2,7 +2,7 @@
 
 namespace app\components\basket;
 use yii\base\Widget;
-
+use app\modules\index\models\MyHelper;
 class WBasketResult extends Widget
 {
 
@@ -24,15 +24,15 @@ class WBasketResult extends Widget
              <table class="table">
                  <tr>
                      <td>Стоимость</td>
-                     <td><b><?=$this->model['money']?> руб.</b></td>
+                     <td><b><?= MyHelper::money($this->model['money'])?> руб.</b></td>
                  </tr>
                  <tr>
                      <td>Доставка</td>
-                     <td><?=$this->model['price']?> руб.</td>
+                     <td><b><?=MyHelper::money($this->model['price'])?> руб.</b></td>
                  </tr>
                  <tr>
                      <td>ИТОГО</td>
-                     <td><b><?=$this->model['total_money']?> руб.</b></td>
+                     <td><b><?=MyHelper::money($this->model['total_money'])?> руб.</b></td>
                  </tr>
              </table>
              <?php
