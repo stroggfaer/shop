@@ -511,3 +511,30 @@ div.sort-filter span:hover {
 #modal-table img.img{
     width: 35px;
 }
+/*Вход*/
+#login-form {
+    padding: 20px 0;
+}
+#login-form div.form-group {
+    display: block;
+    margin: 5px 0 10px;
+}
+#login-form div.form-group input.form-control {
+    height: 30px;
+}
+#login-form div.form-group input.checkbox {
+    width: auto;
+    height: 18px;
+}
+#login-form div.reset {
+   color: #7F7F7F;
+   font-size: 12px;
+}
+#login-form div.reset a{
+
+}
+#login-form .help-block {
+    margin: 3px 0px 3px 0px;
+    padding: 0px;
+    font-size: 11px;
+}

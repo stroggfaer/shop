@@ -19,9 +19,7 @@ class WTree extends Widget{
         }
 
     }
-    public function run(){
-
-        ?>
+    public function run(){?>
         <div class="i <?= (isset($this->group['group']) && !empty($this->group['group']) ? 'groups': '')?>">
             <a href="/catalog/<?=$this->group['id']; ?>"><?=$this->group['title']?><?php if(isset($this->group['group']) && !empty($this->group['group'])): ?>  <span class="open-down"></span><?php endif;?></a>
                 <?php if(isset($this->group['group']) && !empty($this->group['group'])):?>

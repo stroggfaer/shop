@@ -62,11 +62,18 @@ $(document).on("change","#address-delivery_id input", function(event) {
         replace: false,
         data: {'delivery_id': $(this).val()},
         success:function(data){
-            console.log("Success works!")
+            console.log("Success works!");
         },
     });
 });
 
+// Вход ЛК;
+$(document).on("submit", '#login-form', function(event) {
+    event.preventDefault();
+    return $.pjax.submit(event,'#pjax-container-logon',{"url":"/site/login","push": false,"replace":false,"scrollTo":false});
+});
+//jQuery(document).pjax("#w0 a", "#w0", {"push":true,"replace":false,"timeout":1000,"scrollTo":false});
+//jQuery(document).on('submit', "#w0 form[data-pjax]", function (event) {jQuery.pjax.submit(event, '#w0', {"push":true,"replace":false,"timeout":1000,"scrollTo":false});});
 $(document).on('ready pjax:success', function() {
-    // alert('+');
+
 });

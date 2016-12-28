@@ -531,6 +531,9 @@ button.button_vinous {
 button.button_vinous.size-1 {
     width: 100%;
 }
+button.button_vinous.size-2 {
+    width: 80px;
+}
 /*?????? Ajax ?????????? ???*/
 div.AjaxButton {
    margin: 15px auto;
@@ -663,4 +666,15 @@ table.goods td.price{
 }
 table.goods td.action{
 
+}
+.alert-error {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    position: relative;
+}
+.alert-error .close {
+    position: absolute;
+    right: 5px;
+    top: 1px;
 }

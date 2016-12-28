@@ -69,6 +69,12 @@ $session = Yii::$app->session;
             <div class="col-md-3 col-sm-12 sidebar">
                 <div class="row">
                     <div class="col-sm-12 block">
+                        <h2 class="title">Вход личный кабинет</h2>
+                        <?= \app\components\sidebar\WLogin::widget()?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 block">
                         <h2 class="title">Поиск по сайту</h2>
                         <form class="search" role="search">
                             <div class="form-group">

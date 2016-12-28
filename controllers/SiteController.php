@@ -5,14 +5,19 @@ namespace app\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\base\InvalidParamException;
 use yii\filters\VerbFilter;
+use yii\web\BadRequestHttpException;
 
 // Путь к моделям;
-use app\modules\index\models\LoginForm;
+use app\modules\user\models\LoginForm;
+use app\modules\user\models\SignupForm;
 use app\modules\index\models\ContactForm;
 use app\modules\index\controllers\AppController;
 use app\modules\index\models\Pages;
 use app\modules\catalog\models\Goods;
+
+
 class SiteController extends AppController
 {
     /**
@@ -23,8 +28,13 @@ class SiteController extends AppController
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['logout', 'signup'],
                 'rules' => [
+                    [
+                        'actions' => ['signup'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
                     [
                         'actions' => ['logout'],
                         'allow' => true,
@@ -68,8 +78,8 @@ class SiteController extends AppController
         $newGoods = Goods::find()->where(['status'=>1])->orderby('date desc')->limit(3)->all();
         return $this->render('index', [
                 'newGoods' => $newGoods,
+        ]);
 
-            ]);
     }
 
     /**
@@ -79,29 +89,32 @@ class SiteController extends AppController
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()) && $model->login()) {
+            return \app\components\sidebar\WLogin::widget(['model'=>$model]);
+        }else{
+            return \app\components\sidebar\WLogin::widget(['model'=>$model]);
         }
-        return $this->render('login', [
-            'model' => $model,
-        ]);
     }
 
-    /**
-     * Logout action.
-     *
-     * @return string
-     */
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
+    }
+    // Регистрация;
+    public function actionSignup()
+    {
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                Yii::$app->getSession()->setFlash('success', 'Подтвердите ваш электронный адрес.');
+                return $this->goHome();
+            }
+        }
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
     }
 
     /**
