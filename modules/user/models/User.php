@@ -1,13 +1,14 @@
 <?php
 
 namespace app\modules\user\models;
-
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
+
+
 /**
  * This is the model class for table "user".
  *
@@ -15,6 +16,7 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $username
+  * @property string $phone
  * @property string $auth_key
  * @property string $email_confirm_token
  * @property string $password_hash
@@ -47,8 +49,8 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['username', 'required'],
-            ['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
+            [['username','phone'], 'required'],
+            //['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
             ['username', 'unique', 'targetClass' => self::className(), 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 

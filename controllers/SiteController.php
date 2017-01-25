@@ -45,7 +45,7 @@ class SiteController extends AppController
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'logout' => ['get'],
                 ],
             ],
         ];
@@ -64,6 +64,7 @@ class SiteController extends AppController
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+
         ];
     }
 
@@ -107,6 +108,7 @@ class SiteController extends AppController
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
+
             if ($user = $model->signup()) {
                 Yii::$app->getSession()->setFlash('success', 'Подтвердите ваш электронный адрес.');
                 return $this->goHome();

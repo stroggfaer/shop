@@ -19,7 +19,7 @@ class WLogin extends Widget{
     }
     public function run()
     {
-       Pjax::begin(['id' => 'pjax-container-logon']);
+       Pjax::begin(['id' => 'pjax-container-logon','linkSelector'=>'pjax-container-logon']);
         if (Yii::$app->user->isGuest) {
             $model = !empty($this->model) ? $this->model : new LoginForm();
             ?>
@@ -43,7 +43,12 @@ class WLogin extends Widget{
             <?php ActiveForm::end(); ?>
             <?php
         }else{
-            print_arr(Yii::$app->user->identity->username);
+
+            //print_arr(Yii::$app->user->identity->username);
+            ?>
+            <div><a href="#"><?=Yii::$app->user->identity->username?></a> </div>
+            <div><a href="/site/logout">Выход</a> </div>
+          <?php
         }
         Pjax::end();
     }

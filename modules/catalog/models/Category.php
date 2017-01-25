@@ -32,7 +32,7 @@ class Category extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    /*
+
     public function rules()
     {
         return [
@@ -42,12 +42,12 @@ class Category extends \yii\db\ActiveRecord
             [['seo_description'], 'string', 'max' => 400],
             [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['parent_id' => 'id']],
         ];
-    }*/
+    }
 
     /**
      * @inheritdoc
      */
-    /*
+
     public function attributeLabels()
     {
         return [
@@ -59,7 +59,7 @@ class Category extends \yii\db\ActiveRecord
             'seo_description' => 'Seo Description',
             'status' => 'Status',
         ];
-    }*/
+    }
 
     /**
      * @return \yii\db\ActiveQuery

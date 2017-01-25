@@ -1,0 +1,13 @@
+#menu {
+    padding: 5px 0;
+}
+#menu div.item {
+    padding: 5px 3px;
+}
+a.title{
+   font-size: 14px;
+   font-weight: bold;
+}
+#menu div.item div.i {
+    margin: 2px 0 2px 10px;
+}

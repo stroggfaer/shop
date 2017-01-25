@@ -70,10 +70,27 @@ $(document).on("change","#address-delivery_id input", function(event) {
 // Вход ЛК;
 $(document).on("submit", '#login-form', function(event) {
     event.preventDefault();
-    return $.pjax.submit(event,'#pjax-container-logon',{"url":"/site/login","push": false,"replace":false,"scrollTo":false});
+    $.pjax.submit(event,'#pjax-container-logon',{"url":"/site/login","push": false,"replace":false,"scrollTo":false});
 });
 //jQuery(document).pjax("#w0 a", "#w0", {"push":true,"replace":false,"timeout":1000,"scrollTo":false});
 //jQuery(document).on('submit', "#w0 form[data-pjax]", function (event) {jQuery.pjax.submit(event, '#w0', {"push":true,"replace":false,"timeout":1000,"scrollTo":false});});
-$(document).on('ready pjax:success', function() {
-
+$(document).on('ready pjax:success', function(data, status, xhr, options) {
+  //  console.log(data);
+  //  console.log(status);
+   // console.log(xhr);
+   // console.log(options);
 });
+// Преолдер;
+$(document).on('pjax:send', function() {
+   // $('#loading').show()
+})
+$(document).on('pjax:complete', function() {
+   // $('#loading').hide()
+})
+// Обновления форма;
+function updateData() {
+    $.post(window.document.href,{'_form':true},function(data){
+         $("#order-form").html($(data).find("#order-form").html());
+    })
+}
+

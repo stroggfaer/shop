@@ -538,3 +538,10 @@ div.sort-filter span:hover {
     padding: 0px;
     font-size: 11px;
 }
+/**/
+#signup {
+    padding: 5px 0;
+}
+#signup .help-block {
+    font-size: 11px;
+}

@@ -7,29 +7,38 @@ use yii\bootstrap\ActiveForm;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\modules\user\models\SignupForm */
 
-$this->title = 'Signup';
+$this->title = 'Регистрация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-default-signup">
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>Please fill out the following fields to signup:</p>
-
+<div class="user-default-signup" id="signup">
     <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
-            <?= $form->field($model, 'username') ?>
-            <?= $form->field($model, 'email') ?>
-            <?= $form->field($model, 'password')->passwordInput() ?>
-
+    <div class="col-md-8">
+        <div class="panel panel-default">
+        <div class="panel-heading"><?= Html::encode($this->title) ?></div>
+        <div class="panel-body">
+            <?php $form = ActiveForm::begin([
+                'id' => 'form-signup','class'=>'form-horizontal',
+                'enableClientValidation' => true,
+                'validateOnBlur'         => false,
+                'validateOnType'         => false,
+                'validateOnChange'       => false,
+                'validateOnSubmit'       => true,
+            ]); ?>
+            <?= $form->field($model, 'username')->textinput(['autofocus' => true ,'class'=>'form-control placeholder','placeholder'=>"ФИО"])->label(false)?>
+            <?= $form->field($model, 'phone')->widget(\yii\widgets\MaskedInput::className(), ['clientOptions'=>['clearIncomplete'=>true],'type'=>'tel', 'id'=>'phone', 'name' => 'phone','class'=>'form-control placeholder phone center', 'mask' => ['+7 999 999 9999']])->textInput(['placeholder' => 'phone'])->label(false)?>
+            <?= $form->field($model, 'email')->textinput(['autofocus' => true ,'class'=>'form-control placeholder','placeholder'=>"E-mail"])->label(false) ?>
+            <?= $form->field($model, 'password_repeat')->passwordInput(['autofocus' => true ,'class'=>'form-control placeholder','placeholder'=>"Пароль"])->label(false); ?>
+            <?= $form->field($model, 'password')->passwordInput(['autofocus' => true ,'class'=>'form-control placeholder','placeholder'=>"Повторит пароль"])->label(false)->hint('Длинна пароля не меньше 4 символов.'); ?>
             <?php /* $form->field($model, 'verifyCode')->widget(Captcha::className(), [
                 'captchaAction' => '/user/default/captcha',
                 'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
             ]) */?>
             <div class="form-group">
-                <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                <?= Html::submitButton('Регистрация', ['class' => 'btn button_vinous', 'name' => 'signup-button']) ?>
             </div>
             <?php ActiveForm::end(); ?>
-        </div>
+          </div>
+      </div>
+    </div>
     </div>
 </div>

@@ -2,11 +2,12 @@
 
 namespace app\modules\index\controllers;
 
-use yii\web\Controller;
-use yii\db\Connection;
+
 use app\modules\index\models\Pages;
 use app\modules\catalog\models\Category;
-use  yii;
+use  Yii;
+use yii\web\Controller;
+use yii\db\Connection;
 /**
  * Default controller for the `AppController` module
  */
@@ -31,6 +32,8 @@ class AppController extends Controller
     {
         // Загрузка меню;
         $pagesMenu = Pages::getPages();
+
+
 
         parent::init();
 

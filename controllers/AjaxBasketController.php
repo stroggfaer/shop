@@ -87,4 +87,12 @@ class AjaxBasketController extends AppController
         }
 
     }
+    // Обновления формы;
+    public function actionOrderForm()
+    {
+        $request = Yii::$app->request;
+        if ($request->post('_form')) {
+            return \app\components\basket\WBasketOrderForm::widget();
+        }
+    }
 }
