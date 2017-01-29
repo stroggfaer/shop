@@ -32,7 +32,7 @@ class Images extends \yii\db\ActiveRecord
         return [
             [['hash'], 'required'],
             [['type', 'status'], 'integer'],
-            [['hash'], 'string', 'max' => 32],
+            [['hash','exp'], 'string', 'max' => 32],
         ];
     }
 

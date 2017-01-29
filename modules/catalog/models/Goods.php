@@ -2,6 +2,8 @@
 
 namespace app\modules\catalog\models;
 use app\modules\catalog\models\CategoryDetails;
+use app\modules\core\models\UploadForm;
+
 use yii\data\ActiveDataProvider;
 use yii\db\Query;
 use Yii;
@@ -26,6 +28,8 @@ use Yii;
  */
 class Goods extends \yii\db\ActiveRecord
 {
+
+
     /**
      * @inheritdoc
      */
@@ -34,6 +38,54 @@ class Goods extends \yii\db\ActiveRecord
         return 'goods';
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['variation_id', 'image_id', 'show_main', 'count', 'count_max', 'status'], 'integer'],
+            [['name'], 'required'],
+            [['text'], 'string'],
+            ['text','default', 'value' => ''],
+            ['date', 'default', 'value' => date('Y-m-d H:s')],
+            ['count','default', 'value' => 1],
+            ['count_max','default', 'value' => 1],
+            [['price', 'price_d'], 'number'],
+            [['date'], 'safe'],
+            [['name'], 'string', 'max' => 128],
+            [['image_id'], 'exist', 'skipOnError' => true, 'targetClass' => Images::className(), 'targetAttribute' => ['image_id' => 'id']],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'variation_id' => 'Variation ID',
+            'image_id' => 'Image ID',
+            'name' => 'Name',
+            'text' => 'Text',
+            'price' => 'Price',
+            'price_d' => 'Price D',
+            'show_main' => 'Show Main',
+            'count' => 'Count',
+            'date' => 'Date',
+            'count_max' => 'Count Max',
+            'status' => 'Status',
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategoryDetails()
+    {
+        return $this->hasMany(CategoryDetails::className(), ['good_id' => 'id']);
+    }
 
 
     /**
@@ -100,4 +152,5 @@ class Goods extends \yii\db\ActiveRecord
         $this->load($params);
         return $dataProvider;
     }
+
 }

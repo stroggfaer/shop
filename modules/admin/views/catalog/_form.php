@@ -15,9 +15,11 @@ use app\modules\catalog\models\Category;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?php $parent = Category::find()->orderBy('title ASC')->all();
+    <?php
+          // Загрузка категорий;
+          $parent = Category::find()->orderBy('id ASC')->all();
           $items = ArrayHelper::map(array_merge($parent),'id','title');
-          $params = ['prompt' => 'Выберите категорию'];
+          $params = ['prompt' => 'Выберите категорию','options' => [$model->id=>['selected'=>'selected']]];
     ?>
 
     <?=$form->field($model, 'parent_id')->DropDownList($items, $params);  ?>

@@ -6,8 +6,11 @@ use Yii;
 use app\modules\catalog\models\Goods;
 use app\modules\admin\models\PostSearchGoods;
 use app\modules\admin\controllers\BackendController;
+use app\modules\core\models\UploadForm;
+use app\modules\core\models\ImagesCore;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\base\Model;
 
 /**
  * GoodsController implements the CRUD actions for Goods model.
@@ -51,8 +54,10 @@ class GoodsController extends BackendController
      */
     public function actionView($id)
     {
+        $model_images = new UploadForm();
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id)
+
         ]);
     }
 
@@ -63,13 +68,37 @@ class GoodsController extends BackendController
      */
     public function actionCreate()
     {
-        $model = new Goods();
+        //Путь изображения;
+        $dirNameGoods = $_SERVER['DOCUMENT_ROOT'].'/files/goods/';
+        //Путь к миниатюра;
+        $dirNameThumbs = $_SERVER['DOCUMENT_ROOT'].'/files/goods/thumbs/';
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $model = new Goods();
+        // Загрузка изображения;
+        $model_images = new UploadForm();
+
+        if ($model->load(Yii::$app->request->post()) ) {
+
+            $isValid = $model->validate();
+          //  $isValid = $model_images->validate(false);
+            // print_arr(Yii::$app->request->post());
+
+            if($isValid) {
+                $model->save();
+                /*
+                // Обработка изображения;
+                $imagesCore = new ImagesCore($dirNameGoods.'test.jpg');
+                //Параметры  (options: exact, portrait, landscape, auto, crop);
+                $imagesCore->resizeImage(730, 297, 'auto');
+                //Качество избражения: 100;
+                $imagesCore->saveImage($dirNameGoods.'test.jpg', 200);*/
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            $model_images->validate(false);
             return $this->render('create', [
                 'model' => $model,
+                'model_images'=> $model_images,
             ]);
         }
     }
@@ -83,12 +112,18 @@ class GoodsController extends BackendController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model_images = new UploadForm();
+        if ($model->load(Yii::$app->request->post()) && $model_images->load(Yii::$app->request->post())) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $isValid = $model->validate();
+            if($isValid) {
+                $model->save(false);
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'model_images' => $model_images,
             ]);
         }
     }
@@ -121,4 +156,5 @@ class GoodsController extends BackendController
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }

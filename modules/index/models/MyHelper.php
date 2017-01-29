@@ -2,8 +2,8 @@
 namespace app\modules\index\models;
 
 use Yii;
-
-class MyHelper extends \yii\db\ActiveRecord
+use yii\base\Model;
+class MyHelper extends Model
 {
     // Обработка цены;
     public static function money($value, $decimal = 0)
