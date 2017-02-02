@@ -40,4 +40,14 @@ class MyHelper extends Model
         return date("d.m.Y в H:i", $timestamp);
     }
 
+    // Генерация уникальные чисел или хеш;
+    public  function getRandomFileName($has = false, $params = 10)
+    {
+        if(!empty($has)){
+            $random = substr(md5(microtime() . rand(0, 99999)), 0, $params);
+        }else{
+            $random = substr(microtime() . rand(0, 99999), 0, $params);
+        }
+        return $random;
+    }
 }

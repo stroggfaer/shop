@@ -4,6 +4,8 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use app\modules\catalog\models\Goods;
+use app\modules\catalog\models\CategoryDetails;
+use app\modules\catalog\models\Category;
 use app\modules\admin\models\PostSearchGoods;
 use app\modules\admin\controllers\BackendController;
 use app\modules\core\models\UploadForm;
@@ -54,9 +56,14 @@ class GoodsController extends BackendController
      */
     public function actionView($id)
     {
-        $model_images = new UploadForm();
+        $model = $this->findModel($id);
+
+        if(!empty($model->categoryDetails[0])) {
+            $model->title = Category::find()->where(['id'=>$model->categoryDetails[0]->category_id])->one()->title;
+        }
+
         return $this->render('view', [
-            'model' => $this->findModel($id)
+            'model' => $model,
 
         ]);
     }
@@ -76,15 +83,42 @@ class GoodsController extends BackendController
         $model = new Goods();
         // Загрузка изображения;
         $model_images = new UploadForm();
+        // Загрузка связующий категорий;
 
         if ($model->load(Yii::$app->request->post()) ) {
+            // Валидаций;
+          //  $isValid = $model_images->validate(false);
+            $session = Yii::$app->session;
+
+            print_arr($session->getFlash('fileImages'));
+            print_arr(Yii::$app->request->post());
+        //   print_arr($model_images);
+
+            die('StoP A ');
+           // Обработка изображения;
+           $imagesCore = new ImagesCore($dirNameGoods.'test.jpg');
+           //Параметры  (options: exact, portrait, landscape, auto, crop);
+           $imagesCore->resizeImage(730, 297, 'auto');
+           //Качество избражения: 100;
+           $imagesCore->saveImage($dirNameGoods.'test.jpg', 200);
+
+
+            die('StoP B ');
 
             $isValid = $model->validate();
-          //  $isValid = $model_images->validate(false);
-            // print_arr(Yii::$app->request->post());
-
+            // Добавляем запись товара;
             if($isValid) {
-                $model->save();
+                if($model->save()){
+                    // Добавляем запись категорий;
+                    if(!empty($model->category_id)) {
+                        $categoryDetails = new CategoryDetails();
+                        $categoryDetails->category_id = $model->category_id;
+                        $categoryDetails->good_id = $model->id;
+                        $categoryDetails->status = 1;
+                        $categoryDetails->save();
+                    }
+                }
+
                 /*
                 // Обработка изображения;
                 $imagesCore = new ImagesCore($dirNameGoods.'test.jpg');
@@ -93,6 +127,7 @@ class GoodsController extends BackendController
                 //Качество избражения: 100;
                 $imagesCore->saveImage($dirNameGoods.'test.jpg', 200);*/
             }
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             $model_images->validate(false);
@@ -113,11 +148,19 @@ class GoodsController extends BackendController
     {
         $model = $this->findModel($id);
         $model_images = new UploadForm();
-        if ($model->load(Yii::$app->request->post()) && $model_images->load(Yii::$app->request->post())) {
 
-            $isValid = $model->validate();
-            if($isValid) {
-                $model->save(false);
+        // Загрузка категория;
+        if(!empty($model->categoryDetails[0])) {
+            $model->category_id = $model->categoryDetails[0]->category_id;
+        }
+        if ($model->load(Yii::$app->request->post()) &&  $model->save()) {
+            // Добавляем запись категорий;
+            if(!empty($model->category_id)) {
+                $categoryDetails = new CategoryDetails();
+                $categoryDetails->category_id = $model->category_id;
+                $categoryDetails->good_id = $model->id;
+                $categoryDetails->status = 1;
+                $categoryDetails->save();
             }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

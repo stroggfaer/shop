@@ -3,7 +3,7 @@ namespace app\modules\core\models;
 
 use yii\base\Model;
 use yii\web\UploadedFile;
-
+use Yii;
 class UploadForm extends Model
 {
     /**
@@ -14,29 +14,33 @@ class UploadForm extends Model
     public function rules()
     {
         return [
-          //  [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, gif', 'maxFiles' => 250],
+            [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, gif', 'maxFiles' => 250],
         ];
     }
 
     public function upload($path = '/files/uploads/')
     {
+        $response = Yii::$app->response;
+        $response->format = \yii\web\Response::FORMAT_JSON;
+
         // Путь к пвпке;
         $pathFiles = $_SERVER['DOCUMENT_ROOT'].$path;
-
         // Загрузка Файлов;
         if ($this->validate()) {
+            $path = array();
             foreach ($this->imageFiles as $file) {
                 $filename = self::getRandomFileName($pathFiles.$file->baseName,$file->extension);
                 $file->saveAs($pathFiles.$filename.'.'.$file->extension);
+                $path = $pathFiles.$filename.'.'.$file->extension;
             }
-            return true;
+            return $response->data = ['upload'=> true,'pathFiles'=>$path];
         } else {
             return false;
         }
     }
 
     // Генерация уникального имени файла;
-    public static function getRandomFileName($path, $extension='',$params = 10)
+    public  function getRandomFileName($path, $extension='',$params = 10)
     {
         $extension = $extension ? '.' . $extension : '';
         $path = $path ? $path . '/' : '';

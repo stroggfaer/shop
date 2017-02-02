@@ -6,7 +6,8 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\modules\catalog\models\Goods;
-
+use app\modules\catalog\models\CategoryDetails;
+use app\modules\catalog\models\Category;
 /**
  * PostSearchGoods represents the model behind the search form about `app\modules\catalog\models\Goods`.
  */
@@ -19,8 +20,9 @@ class PostSearchGoods extends Goods
     {
         return [
             [['id', 'variation_id', 'image_id', 'show_main', 'count', 'count_max', 'status'], 'integer'],
-            [['name', 'text', 'date'], 'safe'],
+            [['name','title', 'text', 'date'], 'safe'],
             [['price', 'price_d'], 'number'],
+
         ];
     }
 
@@ -72,9 +74,14 @@ class PostSearchGoods extends Goods
             'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'text', $this->text]);
+        $query->andFilterWhere(['like', 'name', $this->name])->andFilterWhere(['like', 'text', $this->text]);
 
+        $query->leftJoin(CategoryDetails::tableName(),'category_details.good_id = goods.id')
+              ->leftJoin(Category::tableName(),'category_details.category_id = category.id');
+
+        $query->select(['category.title','goods.*']);
+
+        $query->andFilterWhere(['like', 'category.title', $this->title]);
         return $dataProvider;
     }
 }

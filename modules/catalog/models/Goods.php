@@ -14,7 +14,6 @@ use Yii;
  * @property integer $id
  * @property integer $variation_id
  * @property integer $image_id
- * @property integer $category_id
  * @property string $title
  * @property string $text
  * @property string $price
@@ -29,7 +28,8 @@ use Yii;
 class Goods extends \yii\db\ActiveRecord
 {
 
-
+    public $category_id;
+    public $title;
     /**
      * @inheritdoc
      */
@@ -44,13 +44,14 @@ class Goods extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['variation_id', 'image_id', 'show_main', 'count', 'count_max', 'status'], 'integer'],
-            [['name'], 'required'],
+            [['variation_id', 'image_id', 'show_main', 'count', 'count_max','category_id', 'status'], 'integer'],
+            [['name','price'], 'required'],
             [['text'], 'string'],
             ['text','default', 'value' => ''],
             ['date', 'default', 'value' => date('Y-m-d H:s')],
             ['count','default', 'value' => 1],
             ['count_max','default', 'value' => 1],
+            ['price_d','default', 'value' => 0],
             [['price', 'price_d'], 'number'],
             [['date'], 'safe'],
             [['name'], 'string', 'max' => 128],
@@ -65,6 +66,7 @@ class Goods extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'title' =>"Категория",
             'variation_id' => 'Variation ID',
             'image_id' => 'Image ID',
             'name' => 'Name',
@@ -152,5 +154,6 @@ class Goods extends \yii\db\ActiveRecord
         $this->load($params);
         return $dataProvider;
     }
+
 
 }

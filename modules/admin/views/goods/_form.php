@@ -6,6 +6,9 @@ use dosamigos\tinymce\TinyMce;
 use kartik\date\DatePicker;
 use kartik\widgets\FileInput;
 use kartik\widgets\TouchSpin;
+use yii\helpers\ArrayHelper;
+use yii\widgets\Breadcrumbs;
+use app\modules\catalog\models\Category;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
@@ -15,7 +18,26 @@ use yii\helpers\Url;
 
 <div class="goods-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(
+        ['options' => ['enctype' => 'multipart/form-data'],
+            'enableAjaxValidation'   => false,
+            'enableClientValidation' => false,
+            'validateOnBlur'         => false,
+            'validateOnType'         => false,
+            'validateOnChange'       => false,
+            'validateOnSubmit'       => true,
+
+        ]); ?>
+
+    <?php
+            // Загрузка категорий;
+            $parent = Category::find()->orderBy('id ASC')->all();
+            $items = ArrayHelper::map(array_merge($parent),'id','title');
+            $params = ['prompt' => 'Выберите категорию','options' => [$model->category_id=>['selected'=>'selected']]];
+    ?>
+
+    <?=$form->field($model, 'category_id')->DropDownList($items, $params);  ?>
+
     <!--
     <?= $form->field($model, 'id')->textInput() ?>
 
@@ -66,14 +88,16 @@ use yii\helpers\Url;
         ]
     ]) ?>
     <?=
-
+    // http://demos.krajee.com/widget-details/fileinput;
     $form->field($model_images, 'imageFiles[]')->widget(
         FileInput::classname(), [
             'options' => ['multiple' => true],
-            'pluginOptions' => ['previewFileType' => 'any',
+            'pluginOptions' => ['previewFileType' => 'image',
                 'uploadUrl' => Url::to(['/admin/ajax-backend/file-upload']),
+                'attribute' => 'attachment_1[]',
                 'uploadExtraData' => [
                     'image_id' => 1001,
+                    'good_id' => $model->id,
                     'cat_id' => 'Nature'
                 ],
                 'maxFileCount' => 6

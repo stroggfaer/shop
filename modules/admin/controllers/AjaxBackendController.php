@@ -17,16 +17,33 @@ class AjaxBackendController extends BackendController
     {
         // Ответ данные JSON-формат;
         $response = Yii::$app->response;
-        $request = Yii::$app->request;
         $response->format = \yii\web\Response::FORMAT_JSON;
 
-        $model = new UploadForm();
+        $session = Yii::$app->session;
+        $session->open();
 
+        $model = new UploadForm();
+       // print_arr(Yii::$app->request->post());
         if (Yii::$app->request->isPost) {
+
             $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
             if ($model->upload()) {
+                     //$session['fileImages'] = $response->data['pathFiles'];
+                $pathFiles = array();
+
+                $pathFiles[Yii::$app->request->post('file_id')]['path'] = $response->data['pathFiles'];
+                $session->setFlash('fileImages',$pathFiles);
+
+                if(empty(Yii::$app->request->post('good_id')) &&  Yii::$app->request->post('file_id') > 0){
+                   // echo 'A';
+                }else{
+                   // echo 'B';
+                }
+
+
+
                 // file is uploaded successfully
-                return $response->data = ['success' => true];
+                return true;
             }
         }
         return false;
