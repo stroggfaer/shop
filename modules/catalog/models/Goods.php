@@ -13,17 +13,18 @@ use Yii;
  *
  * @property integer $id
  * @property integer $variation_id
- * @property integer $image_id
- * @property string $title
+ * @property string $name
  * @property string $text
  * @property string $price
  * @property string $price_d
  * @property integer $show_main
- * @property string $data
+ * @property integer $count
+ * @property string $date
+ * @property integer $count_max
  * @property integer $status
  *
- * @property Images $image
- * @property Category $category
+ * @property CategoryDetails[] $categoryDetails
+ * @property Images[] $images
  */
 class Goods extends \yii\db\ActiveRecord
 {
@@ -44,7 +45,7 @@ class Goods extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['variation_id', 'image_id', 'show_main', 'count', 'count_max','category_id', 'status'], 'integer'],
+            [['variation_id', 'show_main', 'count', 'count_max','category_id', 'status'], 'integer'],
             [['name','price'], 'required'],
             [['text'], 'string'],
             ['text','default', 'value' => ''],
@@ -55,7 +56,7 @@ class Goods extends \yii\db\ActiveRecord
             [['price', 'price_d'], 'number'],
             [['date'], 'safe'],
             [['name'], 'string', 'max' => 128],
-            [['image_id'], 'exist', 'skipOnError' => true, 'targetClass' => Images::className(), 'targetAttribute' => ['image_id' => 'id']],
+
         ];
     }
 
@@ -68,7 +69,6 @@ class Goods extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' =>"Категория",
             'variation_id' => 'Variation ID',
-            'image_id' => 'Image ID',
             'name' => 'Name',
             'text' => 'Text',
             'price' => 'Price',
@@ -88,17 +88,27 @@ class Goods extends \yii\db\ActiveRecord
     {
         return $this->hasMany(CategoryDetails::className(), ['good_id' => 'id']);
     }
-
-
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getImage()
+    public function getImages()
     {
-        return $this->hasOne(Images::className(), ['id' => 'image_id']);
+        return $this->hasMany(Images::className(), ['good_id' => 'id']);
     }
 
-
+    // Определяет название директории;
+    public static function image_dir($image_id) {
+        return substr(md5($image_id), 0, 2);
+    }
+    // Обработка путь к файлу;
+    public static function getImagesPath($good_id)
+    {
+        if(!empty($good_id)) {
+            return '/files/goods/' . self::image_dir($good_id) . '/';
+         }else {
+            return false;
+        }
+    }
     // Загрузка все товары;
     public static function getGoodsAll()
     {

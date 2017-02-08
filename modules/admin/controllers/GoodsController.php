@@ -4,6 +4,7 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use app\modules\catalog\models\Goods;
+use app\modules\catalog\models\Images;
 use app\modules\catalog\models\CategoryDetails;
 use app\modules\catalog\models\Category;
 use app\modules\admin\models\PostSearchGoods;
@@ -43,6 +44,10 @@ class GoodsController extends BackendController
         $searchModel = new PostSearchGoods();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+      //  $test = Images::getUpdateImages(1000040);
+
+        //print_arr($test);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -76,9 +81,9 @@ class GoodsController extends BackendController
     public function actionCreate()
     {
         //Путь изображения;
-        $dirNameGoods = $_SERVER['DOCUMENT_ROOT'].'/files/goods/';
+        $dirNameGoods = Yii::$app->params['img_max'];
         //Путь к миниатюра;
-        $dirNameThumbs = $_SERVER['DOCUMENT_ROOT'].'/files/goods/thumbs/';
+       // $dirNameThumbs = Yii::$app->params['img_min'];
 
         $model = new Goods();
         // Загрузка изображения;
@@ -86,28 +91,10 @@ class GoodsController extends BackendController
         // Загрузка связующий категорий;
 
         if ($model->load(Yii::$app->request->post()) ) {
-            // Валидаций;
-          //  $isValid = $model_images->validate(false);
             $session = Yii::$app->session;
 
-            print_arr($session->getFlash('fileImages'));
-            print_arr(Yii::$app->request->post());
-        //   print_arr($model_images);
-
-            die('StoP A ');
-           // Обработка изображения;
-           $imagesCore = new ImagesCore($dirNameGoods.'test.jpg');
-           //Параметры  (options: exact, portrait, landscape, auto, crop);
-           $imagesCore->resizeImage(730, 297, 'auto');
-           //Качество избражения: 100;
-           $imagesCore->saveImage($dirNameGoods.'test.jpg', 200);
-
-
-            die('StoP B ');
-
-            $isValid = $model->validate();
             // Добавляем запись товара;
-            if($isValid) {
+            if($model->validate()) {
                 if($model->save()){
                     // Добавляем запись категорий;
                     if(!empty($model->category_id)) {
@@ -117,17 +104,49 @@ class GoodsController extends BackendController
                         $categoryDetails->status = 1;
                         $categoryDetails->save();
                     }
+                    // Создаем директории;
+                    if (!mkdir($dirNameGoods.$model->image_dir($model->id),0777, true)) {
+                        $session->remove('fileImages');
+                        return 'Не удалось создать директории...';
+                    }
+                    // Добавляем изображения
+                    $fileSession = ($session['fileImages'] ? $session['fileImages'][key($session['fileImages'])] : false);
+                    // Обработка файл в сессий;
+                    if($fileSession['pathFiles']) {
+                        foreach($fileSession['pathFiles'] as $key => $pathUploads) {
+                            $fileName = explode('/',$pathUploads);
+                            $fileName = end($fileName);
+                            // Добавления запись;
+                            if($model->id) {
+                                $images = new Images();
+                                $images->good_id = $model->id;
+                                $images->hash = $fileName;
+                                $images->type = 1;
+                                $images->status = 1;
+                                $images->save();
+                                // Обработка изображения;
+                                if($images->id) {
+                                    // Поверка файл;
+                                    if (!file_exists($_SERVER['DOCUMENT_ROOT'].$pathUploads)) {
+                                        $session->remove('fileImages');
+                                        return 'Не найден файл';
+                                    }
+                                    // Перемещаем файл;
+                                    rename($_SERVER['DOCUMENT_ROOT'] . $pathUploads, $dirNameGoods . $model->image_dir($model->id) . '/' . $fileName);
+                                    // Обработка изображения;
+                                    $imagesCore = new ImagesCore($dirNameGoods . $model->image_dir($model->id) . '/' . $fileName);
+                                    //Параметры  (options: exact, portrait, landscape, auto, crop);
+                                    $imagesCore->resizeImage(Yii::$app->params['width_max'], Yii::$app->params['height_max'], 'auto');
+                                    //Качество избражения: 100;
+                                    $imagesCore->saveImage($dirNameGoods . $model->image_dir($model->id) . '/' . $fileName, Yii::$app->params['quality']);
+                                }
+                            }
+                        }
+                    }
                 }
-
-                /*
-                // Обработка изображения;
-                $imagesCore = new ImagesCore($dirNameGoods.'test.jpg');
-                //Параметры  (options: exact, portrait, landscape, auto, crop);
-                $imagesCore->resizeImage(730, 297, 'auto');
-                //Качество избражения: 100;
-                $imagesCore->saveImage($dirNameGoods.'test.jpg', 200);*/
             }
-
+            // Унистоженения сессия;
+            if($session['fileImages']) $session->remove('fileImages');
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             $model_images->validate(false);
@@ -156,11 +175,39 @@ class GoodsController extends BackendController
         if ($model->load(Yii::$app->request->post()) &&  $model->save()) {
             // Добавляем запись категорий;
             if(!empty($model->category_id)) {
-                $categoryDetails = new CategoryDetails();
+                $categoryDetails = CategoryDetails::findOne($model->categoryDetails[0]->id);
                 $categoryDetails->category_id = $model->category_id;
                 $categoryDetails->good_id = $model->id;
                 $categoryDetails->status = 1;
                 $categoryDetails->save();
+            }
+            //Путь изображения;
+
+            // Загрузка изображения;
+            foreach($model->images as $key => $image) {
+                // Обновления запись;
+                if($image) {
+
+//                    $imagesUpdate = Images::findOne($image->id);
+//                    $imagesUpdate->good_id = $model->id;
+//                    $imagesUpdate->hash = $image->hash;
+//                    $imagesUpdate->type = 1;
+//                    $imagesUpdate->status = 1;
+//                    $imagesUpdate->save();
+                    // Обработка изображения;
+                    /*
+                    if($imagesUpdate->id) {
+                       // $model_images->upload($dirNameGoods.$image->hash);
+                        $model_images->path = $dirNameGoods.$image->hash;
+                        // Обработка изображения;
+                        $imagesCore = new ImagesCore($dirNameGoods . $model->image_dir($model->id) . '/' . $image->hash);
+                        //Параметры  (options: exact, portrait, landscape, auto, crop);
+                        $imagesCore->resizeImage(Yii::$app->params['width_max'], Yii::$app->params['height_max'], 'auto');
+                        //Качество избражения: 100;
+                        $imagesCore->saveImage($dirNameGoods . $model->image_dir($model->id) . '/' . $image->hash, Yii::$app->params['quality']);
+                    }*/
+
+                }
             }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

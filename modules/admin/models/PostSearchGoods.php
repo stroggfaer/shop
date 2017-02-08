@@ -19,7 +19,7 @@ class PostSearchGoods extends Goods
     public function rules()
     {
         return [
-            [['id', 'variation_id', 'image_id', 'show_main', 'count', 'count_max', 'status'], 'integer'],
+            [['id', 'variation_id', 'show_main', 'count', 'count_max', 'status'], 'integer'],
             [['name','title', 'text', 'date'], 'safe'],
             [['price', 'price_d'], 'number'],
 
@@ -64,7 +64,6 @@ class PostSearchGoods extends Goods
         $query->andFilterWhere([
             'id' => $this->id,
             'variation_id' => $this->variation_id,
-            'image_id' => $this->image_id,
             'price' => $this->price,
             'price_d' => $this->price_d,
             'show_main' => $this->show_main,

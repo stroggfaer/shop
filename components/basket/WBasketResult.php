@@ -2,7 +2,7 @@
 
 namespace app\components\basket;
 use yii\base\Widget;
-use app\modules\index\models\MyHelper;
+use app\modules\core\models\MyHelper;
 class WBasketResult extends Widget
 {
 

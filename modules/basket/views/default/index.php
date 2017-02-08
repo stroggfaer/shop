@@ -2,7 +2,7 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\Pjax;
-use app\modules\index\models\MyHelper;
+use app\modules\core\models\MyHelper;
 
 //print_arr($model->resultmoney);
 ?>

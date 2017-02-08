@@ -4,7 +4,7 @@ namespace app\components\basket;
 use yii\base\Widget;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
-use app\modules\index\models\MyHelper;
+use app\modules\core\models\MyHelper;
 /*--------- Форма отправка заявки --------*/
 class WBasketOrderForm extends Widget
 {

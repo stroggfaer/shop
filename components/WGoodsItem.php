@@ -2,7 +2,7 @@
 
 namespace app\components;
 use yii\base\Widget;
-use app\modules\index\models\MyHelper;
+use app\modules\core\models\MyHelper;
 
 class WGoodsItem extends Widget{
     public $model;

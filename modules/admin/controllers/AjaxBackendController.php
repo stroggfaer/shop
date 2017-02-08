@@ -1,12 +1,9 @@
 <?php
 
 namespace app\modules\admin\controllers;
-use app\modules\admin\controllers\BackendController;
-use app\modules\catalog\models\Goods;
-use app\modules\catalog\models\Images;
-use app\modules\basket\models\Basket;
-use app\modules\basket\models\Address;
 use app\modules\core\models\UploadForm;
+use app\modules\core\models\ImagesCore;
+use app\modules\catalog\models\Images;
 use yii\web\UploadedFile;
 use Yii;
 
@@ -15,6 +12,10 @@ class AjaxBackendController extends BackendController
     // Загрузка несколько файлов;
     public function actionFileUpload()
     {
+        $model = new UploadForm();
+        // Путь по умолчание;
+        $model->path = '/files/uploads/';
+
         // Ответ данные JSON-формат;
         $response = Yii::$app->response;
         $response->format = \yii\web\Response::FORMAT_JSON;
@@ -22,30 +23,57 @@ class AjaxBackendController extends BackendController
         $session = Yii::$app->session;
         $session->open();
 
-        $model = new UploadForm();
-       // print_arr(Yii::$app->request->post());
+        $image_id = Yii::$app->request->post('image_id');
+        $file_id = Yii::$app->request->post('file_id');
+
+        // Записываем сессия; id;
+        if(Yii::$app->request->post('good_id') !== 'null' ) {
+            // Путь директорий;
+            $dirFiles = $_SERVER['DOCUMENT_ROOT'].Yii::$app->request->post('path');
+            // Проверка на дирикторий;
+            if(!is_dir($dirFiles)) {
+                // Если нет папки то создаем;
+                if (!mkdir($dirFiles,0777, true)) return 'Не удалось создать директории...';
+                $model->path = Yii::$app->request->post('path');
+            }else{
+                $model->path = Yii::$app->request->post('path');
+            }
+        }else{
+            // Создаем запись путь директорий;
+            if(empty($_SESSION['fileImages'][$image_id])) {
+                $_SESSION['fileImages'][$image_id]['image_id'] = true;
+            }
+        }
+
+        // Загрузка фотография;
         if (Yii::$app->request->isPost) {
 
+            // Объект параметрый изображения;
             $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
+
             if ($model->upload()) {
                      //$session['fileImages'] = $response->data['pathFiles'];
-                $pathFiles = array();
-
-                $pathFiles[Yii::$app->request->post('file_id')]['path'] = $response->data['pathFiles'];
-                $session->setFlash('fileImages',$pathFiles);
-
-                if(empty(Yii::$app->request->post('good_id')) &&  Yii::$app->request->post('file_id') > 0){
-                   // echo 'A';
-                }else{
-                   // echo 'B';
-                }
-
-
-
-                // file is uploaded successfully
+                    // Обработка путь директорий;
+                    if($session['fileImages']) {
+                        foreach($session['fileImages'] as $key=>$value) {
+                            if($key == $image_id) {
+                                $_SESSION['fileImages'][$image_id]['pathFiles'][$file_id] = $response->data['pathFiles'];
+                            }else{
+                                unset($_SESSION['fileImages'][$key]);
+                            }
+                        }
+                    }
+                    // Обновления запись;
+                    if(Yii::$app->request->post('good_id') !== 'null' ) {
+                        $fileName = explode('/',$response->data['pathFiles']);
+                        $fileName = end($fileName);
+                        Images::getInsertImages(Yii::$app->request->post('good_id'),$fileName);
+                    }
                 return true;
             }
         }
         return false;
     }
+
+
 }

@@ -21,8 +21,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'variation_id') ?>
 
-    <?= $form->field($model, 'image_id') ?>
-
     <?= $form->field($model, 'name') ?>
 
     <?= $form->field($model, 'text') ?>

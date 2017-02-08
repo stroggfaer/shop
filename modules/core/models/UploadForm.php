@@ -10,30 +10,31 @@ class UploadForm extends Model
      * @var UploadedFile[]
      */
     public $imageFiles;
+    public $path;
 
     public function rules()
     {
         return [
-            [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, gif', 'maxFiles' => 250],
+            [['imageFiles'], 'file', 'extensions' => 'png, jpg, gif', 'maxFiles' => 250],
         ];
     }
 
-    public function upload($path = '/files/uploads/')
+    public function upload()
     {
         $response = Yii::$app->response;
         $response->format = \yii\web\Response::FORMAT_JSON;
 
         // Путь к пвпке;
-        $pathFiles = $_SERVER['DOCUMENT_ROOT'].$path;
+        $pathFiles = $_SERVER['DOCUMENT_ROOT'].$this->path;
         // Загрузка Файлов;
         if ($this->validate()) {
-            $path = array();
+            $files = array();
             foreach ($this->imageFiles as $file) {
                 $filename = self::getRandomFileName($pathFiles.$file->baseName,$file->extension);
                 $file->saveAs($pathFiles.$filename.'.'.$file->extension);
-                $path = $pathFiles.$filename.'.'.$file->extension;
+                $files = $this->path.$filename.'.'.$file->extension;
             }
-            return $response->data = ['upload'=> true,'pathFiles'=>$path];
+            return $response->data = ['upload'=> true,'pathFiles'=>$files];
         } else {
             return false;
         }

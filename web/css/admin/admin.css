@@ -11,3 +11,42 @@ a.title{
 #menu div.item div.i {
     margin: 2px 0 2px 10px;
 }
+
+/*Избражения*/
+.images-all {
+
+}
+.images-all div.item{
+    border: 2px solid #8a8a8a;
+    float: left;
+    height: 180px;
+    margin: 5px 5px 10px 0;
+    overflow: hidden;
+    padding: 0;
+    width: 130px;
+    position: relative;
+}
+.images-all div.item:hover .panel-ad {
+    display: block;
+}
+.images-all div.item .panel-ad{
+    padding: 5px 0px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: none;
+}
+.images-all div.item .panel-ad span {
+    color: #2b5436;
+    cursor: pointer;
+    font-size: 21px;
+    margin: 0 0 0 5px;
+}
+.images-all div.item .panel-ad span.glyphicon-remove-sign {
+    margin: 0 5px 0 0;
+    float: right;
+}
+.images-all div.item img{
+    height: 180px;
+    width: 130px;
+}

@@ -9,6 +9,8 @@ use kartik\widgets\TouchSpin;
 use yii\helpers\ArrayHelper;
 use yii\widgets\Breadcrumbs;
 use app\modules\catalog\models\Category;
+use app\modules\catalog\models\Goods;
+use app\modules\core\models\MyHelper;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
@@ -21,7 +23,7 @@ use yii\helpers\Url;
     <?php $form = ActiveForm::begin(
         ['options' => ['enctype' => 'multipart/form-data'],
             'enableAjaxValidation'   => false,
-            'enableClientValidation' => false,
+            'enableClientValidation' => true,
             'validateOnBlur'         => false,
             'validateOnType'         => false,
             'validateOnChange'       => false,
@@ -38,13 +40,6 @@ use yii\helpers\Url;
 
     <?=$form->field($model, 'category_id')->DropDownList($items, $params);  ?>
 
-    <!--
-    <?= $form->field($model, 'id')->textInput() ?>
-
-    <?= $form->field($model, 'variation_id')->textInput() ?>
-
-    <?= $form->field($model, 'image_id')->textInput() ?>
-     -->
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'text')->widget(TinyMce::className(), [
@@ -87,18 +82,39 @@ use yii\helpers\Url;
             'buttondown_txt' => '<i class="glyphicon glyphicon-minus-sign"></i>'
         ]
     ]) ?>
+     <?php
+       // Загрузка изображения;
+       if(!empty($model->id)) {
+           echo '<div class="images-all">';
+           foreach($model->images as $key=>$image) {
+               echo '<div class="item">
+                        <div class="panel-ad bg-success">
+                           <span class="glyphicon glyphicon-plus-sign" title="Добавить обложка"></span>
+                           <span class="glyphicon glyphicon-remove-sign" title="Удалить?"></span>
+                        </div>
+                        <a href="#"><img src="'.$model->getImagesPath($image->good_id).$image->hash.'" alt=""></a>
+                    </div>';
+           }
+           echo '</div>';
+           echo '<div class="clear"></div>';
+       }
+
+     ?>
+
     <?=
+
     // http://demos.krajee.com/widget-details/fileinput;
-    $form->field($model_images, 'imageFiles[]')->widget(
+    $form->field($model_images, 'imageFiles[]',['enableClientValidation' => false])->widget(
         FileInput::classname(), [
             'options' => ['multiple' => true],
             'pluginOptions' => ['previewFileType' => 'image',
                 'uploadUrl' => Url::to(['/admin/ajax-backend/file-upload']),
                 'attribute' => 'attachment_1[]',
                 'uploadExtraData' => [
-                    'image_id' => 1001,
+                    'image_id' => (!empty($model->id) ? $model->id : MyHelper::randomFileName()),
                     'good_id' => $model->id,
-                    'cat_id' => 'Nature'
+                    'path' => $model->getImagesPath($model->id),
+                    //'cat_id' => 'Nature',
                 ],
                 'maxFileCount' => 6
             ],

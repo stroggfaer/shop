@@ -1,5 +1,5 @@
 <?php
-namespace app\modules\index\models;
+namespace app\modules\core\models;
 
 use Yii;
 use yii\base\Model;
@@ -41,12 +41,12 @@ class MyHelper extends Model
     }
 
     // Генерация уникальные чисел или хеш;
-    public  function getRandomFileName($has = false, $params = 10)
+    public  static function randomFileName($has = false, $params = 10)
     {
         if(!empty($has)){
             $random = substr(md5(microtime() . rand(0, 99999)), 0, $params);
         }else{
-            $random = substr(microtime() . rand(0, 99999), 0, $params);
+            $random = ceil(microtime()).rand(0, 999999);
         }
         return $random;
     }
